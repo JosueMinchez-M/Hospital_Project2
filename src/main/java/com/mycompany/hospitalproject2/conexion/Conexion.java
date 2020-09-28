@@ -1,4 +1,4 @@
-package com.mycompany.hospitalproject2;
+package com.mycompany.hospitalproject2.conexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
