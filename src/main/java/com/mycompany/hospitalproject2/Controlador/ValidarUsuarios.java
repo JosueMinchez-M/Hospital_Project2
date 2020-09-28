@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.hospitalproject2;
+package com.mycompany.hospitalproject2.Controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -73,6 +73,11 @@ public class ValidarUsuarios extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String botonRegistrar = request.getParameter("btn_registrar");
+        if(botonRegistrar.equalsIgnoreCase("Registrar")){
+            String user = request.getParameter("txt_user");
+            String pass = request.getParameter("txt_password");
+            
+        }
     }
 
     /**

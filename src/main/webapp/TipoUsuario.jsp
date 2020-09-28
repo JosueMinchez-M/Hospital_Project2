@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Login
-    Created on : 28/09/2020, 13:48:19
+    Document   : TipoUsuario
+    Created on : 28/09/2020, 15:58:08
     Author     : joshua
 --%>
 
@@ -10,28 +10,32 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <title>Login Hospital</title>
+
+        <title>JSP Page</title>
     </head>
     <body>
-        <div class="container mt-4 col-lg-4">
+        <div class="container mt-4 col-lg-5">
             <div class="card col-sm-10">
                 <div class ="card-body text-center">
                     <form class ="form-sign" method = "POST" action="">
                         <div class ="form-group">
-                            <h3>Login</h3>
-                            <img src="imagenes/Login-Hospital.jpg" alt="70" width="150"/>                            
-                            <label>Bienvenidos al sistema del Hospital</label>
+                            <h3>BIENVENIDO AL HOSPITAL</h3>
+                            <h4>Tipo de Usiario</h4>
+                            <img src="imagenes/TipoPaciente.jpg" alt="70" width="170"/>
                         </div>
                         <div class ="form-group">
-                            <label>Usuario:</label>
-                            <input type="text" name="txt_user" class ="form-control">                          
+                            <input type="radio" name="tipoUsuario" value="paciente">Paciente</p>
                         </div>
                         <div class ="form-group">
-                            <label>Contraseña:</label>
-                            <input type="password" name="txt_password" class ="form-control">
-                            
+                            <input type="radio" name="tipoUsuario" value="medico">Médico</p>                            
                         </div>
-                        <input type="submit" name="btn_registrar" value="Registrar" class="btn btn-primary btn_blog">
+                        <div class ="form-group">
+                            <input type="radio" name="tipoUsuario" value="laboratorista">Laboratorista</p>
+                        </div>
+                        <div class ="form-group">
+                            <input type="radio" name="tipoUsuario" value="administrador">Administrador</p>
+                        </div>
+                        <input type="submit" name="btn_ingresar" value="Ingresar" class="btn btn-primary btn_blog">
                     </form>
                 </div>
             </div>
