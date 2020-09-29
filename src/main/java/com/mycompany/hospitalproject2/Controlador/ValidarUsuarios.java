@@ -5,6 +5,8 @@
  */
 package com.mycompany.hospitalproject2.Controlador;
 
+import com.mycompany.hospitalproject2.DAO.PacienteDAO;
+import com.mycompany.hospitalproject2.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,7 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ValidarUs", urlPatterns = {"/ValidarUsuarios"})
 public class ValidarUsuarios extends HttpServlet {
-
+    PacienteDAO pacienteDAO = new PacienteDAO();
+    Paciente paciente = new Paciente();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -72,11 +75,18 @@ public class ValidarUsuarios extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String botonRegistrar = request.getParameter("btn_registrar");
-        if(botonRegistrar.equalsIgnoreCase("Registrar")){
-            String user = request.getParameter("txt_user");
-            String pass = request.getParameter("txt_password");
-            
+        String botonRegistrarPaciente = request.getParameter("btn_registrarPaciente");
+        if(botonRegistrarPaciente.equalsIgnoreCase("Registrar")){
+            String user = request.getParameter("txt_userPaciente");
+            String pass = request.getParameter("txt_passwordPaciente");
+            paciente = pacienteDAO.validar(user, pass);
+            if(paciente.getCodigo() != null){
+                request.getRequestDispatcher("PrincipalPaciente.jsp").forward(request, response);
+            }else{
+                request.getRequestDispatcher("LoginPaciente.jsp").forward(request, response);
+            }
+        }else{
+            request.getRequestDispatcher("LoginPaciente.jsp").forward(request, response);
         }
     }
 
