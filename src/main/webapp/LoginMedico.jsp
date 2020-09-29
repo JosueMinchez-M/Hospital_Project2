@@ -16,7 +16,7 @@
         <div class="container mt-4 col-lg-4">
             <div class="card col-sm-10">
                 <div class ="card-body text-center">
-                    <form class ="form-sign" method = "POST" action="ValidarTipoUsuario">
+                    <form class ="form-sign" method = "POST" action="ValidarMedico">
                         <div class ="form-group">
                             <h3>Login Doctor</h3>
                             <img src="imagenes/Doctor.jpg" alt="70" width="150"/>

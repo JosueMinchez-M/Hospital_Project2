@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author joshua
  */
 @WebServlet(name = "ValidarUs", urlPatterns = {"/ValidarUsuarios"})
-public class ValidarUsuarios extends HttpServlet {
+public class ValidarPaciente extends HttpServlet {
     PacienteDAO pacienteDAO = new PacienteDAO();
     Paciente paciente = new Paciente();
     /**

@@ -33,29 +33,57 @@ public class Doctor extends Persona{
         return colegiado;
     }
 
+    public void setColegiado(String colegiado) {
+        this.colegiado = colegiado;
+    }
+
     public String getTelefono() {
         return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getEspecialidad() {
         return especialidad;
     }
 
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
     public String getCorreo() {
         return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getHorario_Inicio() {
         return horario_Inicio;
     }
 
+    public void setHorario_Inicio(String horario_Inicio) {
+        this.horario_Inicio = horario_Inicio;
+    }
+
     public String getHorario_Fin() {
         return horario_Fin;
+    }
+
+    public void setHorario_Fin(String horario_Fin) {
+        this.horario_Fin = horario_Fin;
     }
 
     public Date getInicio_trabajar() {
         return inicio_trabajar;
     }
-    
+
+    public void setInicio_trabajar(Date inicio_trabajar) {
+        this.inicio_trabajar = inicio_trabajar;
+    }
+
     
 }
