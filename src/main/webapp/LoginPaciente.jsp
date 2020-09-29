@@ -18,17 +18,17 @@
                 <div class ="card-body text-center">
                     <form class ="form-sign" method = "POST" action="">
                         <div class ="form-group">
-                            <h3>Login</h3>
+                            <h3>Login Paciente</h3>
                             <img src="imagenes/Login-Hospital.jpg" alt="70" width="150"/>                            
                             <label>Bienvenidos al sistema del Hospital</label>
                         </div>
                         <div class ="form-group">
                             <label>Usuario:</label>
-                            <input type="text" name="txt_user" class ="form-control">                          
+                            <input type="text" name="txt_userPaciente" class ="form-control">                          
                         </div>
                         <div class ="form-group">
                             <label>Contraseña:</label>
-                            <input type="password" name="txt_password" class ="form-control">
+                            <input type="password" name="txt_passwordPaciente" class ="form-control">
                             
                         </div>
                         <input type="submit" name="btn_registrar" value="Registrar" class="btn btn-primary btn_blog">

@@ -17,7 +17,7 @@
         <div class="container mt-4 col-lg-5">
             <div class="card col-sm-10">
                 <div class ="card-body text-center">
-                    <form class ="form-sign" method = "POST" action="">
+                    <form class ="form-sign" action="ValidarTipoUsuario" method = "POST">
                         <div class ="form-group">
                             <h3>BIENVENIDO AL HOSPITAL</h3>
                             <h4>Tipo de Usiario</h4>
