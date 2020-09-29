@@ -76,6 +76,12 @@ public class ValidarTipoUsuario extends HttpServlet {
         if(radioBoton != null){
             if(radioBoton.equalsIgnoreCase("paciente")){
                 request.getRequestDispatcher("LoginPaciente.jsp").forward(request, response);
+            }else if(radioBoton.equalsIgnoreCase("medico")){
+                request.getRequestDispatcher("LoginMedico.jsp").forward(request, response);
+            }else if(radioBoton.equalsIgnoreCase("laboratorista")){
+                
+            }else if(radioBoton.equalsIgnoreCase("administrador")){
+                
             }
         }
     }
