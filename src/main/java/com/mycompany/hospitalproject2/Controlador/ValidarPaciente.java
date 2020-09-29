@@ -81,6 +81,9 @@ public class ValidarPaciente extends HttpServlet {
             String pass = request.getParameter("txt_passwordPaciente");
             paciente = pacienteDAO.validar(user, pass);
             if(paciente.getCodigo() != null){
+                //String hola = "Hola Mundo";
+                request.setAttribute("nombrePaciente", paciente.getNombre());
+                request.setAttribute("codigoPaciente", paciente.getCodigo());
                 request.getRequestDispatcher("PrincipalPaciente.jsp").forward(request, response);
             }else{
                 request.getRequestDispatcher("LoginPaciente.jsp").forward(request, response);
