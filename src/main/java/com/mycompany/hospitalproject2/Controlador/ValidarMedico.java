@@ -81,6 +81,8 @@ public class ValidarMedico extends HttpServlet {
             String pass = request.getParameter("txt_passwordDoctor");
             doctor = doctorDAO.validar(user, pass);
             if(doctor.getCodigo() != null){
+                request.setAttribute("nombreDoctor", doctor.getNombre());
+                request.setAttribute("codigoDoctor", doctor.getCodigo());
                 request.getRequestDispatcher("PrincipalDoctor.jsp").forward(request, response);
             }else{
                 request.getRequestDispatcher("LoginMedico.jsp").forward(request, response);
