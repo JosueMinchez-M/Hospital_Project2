@@ -81,7 +81,7 @@ public class ValidarTipoUsuario extends HttpServlet {
             }else if(radioBoton.equalsIgnoreCase("laboratorista")){
                 
             }else if(radioBoton.equalsIgnoreCase("administrador")){
-                
+                request.getRequestDispatcher("LoginAdministrador.jsp").forward(request, response);
             }
         }
     }

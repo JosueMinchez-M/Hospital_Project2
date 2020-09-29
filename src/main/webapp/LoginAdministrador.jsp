@@ -1,6 +1,6 @@
 <%-- 
-    Document   : LoginMedico
-    Created on : 28/09/2020, 19:39:29
+    Document   : LoginAdministrador
+    Created on : 28/09/2020, 20:01:01
     Author     : joshua
 --%>
 
@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <title>Login Doctor</title>
+        <title>Login Administrador</title>
     </head>
     <body>
         <div class="container mt-4 col-lg-4">
@@ -18,20 +18,20 @@
                 <div class ="card-body text-center">
                     <form class ="form-sign" method = "POST" action="ValidarTipoUsuario">
                         <div class ="form-group">
-                            <h3>Login Doctor</h3>
-                            <img src="imagenes/Doctor.jpg" alt="70" width="150"/>
+                            <h3>Login Administrador</h3>
+                            <img src="imagenes/Administrador.png" alt="70" width="160"/>
                             <label>Bienvenido al sistema del Hospital</label>
                         </div>
                         <div class ="form-group">
                             <label>Usuario:</label>
-                            <input type="text" name="txt_userDoctor" class ="form-control">                          
+                            <input type="text" name="txt_userAdmin" class ="form-control">                          
                         </div>
                         <div class ="form-group">
                             <label>Contraseña:</label>
-                            <input type="password" name="txt_passwordDoctor" class ="form-control">
+                            <input type="password" name="txt_passwordAdmin" class ="form-control">
                             
                         </div>
-                        <input type="submit" name="btn_registrarDoctor" value="Registrar" class="btn btn-primary btn_blog">
+                        <input type="submit" name="btn_registrarAdmin" value="Registrar" class="btn btn-primary btn_blog">
                     </form>
                 </div>
             </div>
