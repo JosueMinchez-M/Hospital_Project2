@@ -32,20 +32,39 @@ public class Laboratorista extends Persona{
         return numero_registro;
     }
 
+    public void setNumero_registro(String numero_registro) {
+        this.numero_registro = numero_registro;
+    }
+
     public String getTelefono() {
         return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getExamen_realizar() {
         return examen_realizar;
     }
 
+    public void setExamen_realizar(String examen_realizar) {
+        this.examen_realizar = examen_realizar;
+    }
+
     public String getCorreo() {
         return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public Date getFecha_trabajar() {
         return fecha_trabajar;
     }
-    
+
+    public void setFecha_trabajar(Date fecha_trabajar) {
+        this.fecha_trabajar = fecha_trabajar;
+    }
 }
