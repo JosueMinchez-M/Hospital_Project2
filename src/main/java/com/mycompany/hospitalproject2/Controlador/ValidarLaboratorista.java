@@ -81,6 +81,8 @@ public class ValidarLaboratorista extends HttpServlet {
             String pass = request.getParameter("txt_passwordLaboratorista");
             laboratorista = laboratoristaDAO.validar(user, pass);
             if(laboratorista.getCodigo() != null){
+                request.setAttribute("nombreLaboratorista", laboratorista.getNombre());
+                request.setAttribute("codigoLaboratorista", laboratorista.getCodigo());
                 request.getRequestDispatcher("PrincipalLaboratorista.jsp").forward(request, response);
             }else{
                 request.getRequestDispatcher("LoginLaboratorista.jsp").forward(request, response);

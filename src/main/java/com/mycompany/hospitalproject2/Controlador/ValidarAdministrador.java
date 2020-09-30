@@ -81,6 +81,8 @@ public class ValidarAdministrador extends HttpServlet {
             String pass = request.getParameter("txt_passwordAdmin");
             administrador = administradorDAO.validar(user, pass);
             if(administrador.getCodigo() != null){
+                request.setAttribute("nombreAdmin", administrador.getNombre());
+                request.setAttribute("codigoAdmin", administrador.getCodigo());
                 request.getRequestDispatcher("PrincipalAdministrador.jsp").forward(request, response);
             }else{
                 request.getRequestDispatcher("LoginAdministrador.jsp").forward(request, response);
