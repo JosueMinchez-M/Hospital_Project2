@@ -37,7 +37,7 @@
                     Agregar Personal
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="AdminAgregarMedico.jsp" target="frameAdministrador">Doctor</a>
+                    <a class="dropdown-item" href="Prueba?menu=AgregarDoctor&accion=Listar" target="frameAdministrador">Doctor</a>
                     <a class="dropdown-item" href="AdminAgregarLaboratorista.jsp" target="frameAdministrador">Laboratorista</a>
                   </div>
                 </li>
@@ -46,7 +46,7 @@
                     Crear Servicios
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="AdminCrearNuevaConsulta.jsp" target="frameAdministrador">Nueva Consulta Doctor</a>
+                      <a class="dropdown-item" href="AdminCrearNuevaConsulta.jsp" target="frameAdministrador">Nueva Consulta Doctor</a>
                     <a class="dropdown-item" href="AdminCrearNuevoExamenLab.jsp" target="frameAdministrador">Nuevo Examen Laboratorista</a>
                   </div>
                 </li>

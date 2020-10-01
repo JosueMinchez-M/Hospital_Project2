@@ -22,13 +22,24 @@ public class Doctor extends Persona{
         super(codigo, nombre, dpi, password);
         this.colegiado = colegiado;
         this.telefono = telefono;
-        this.especialidad = especialidad;
+        //this.especialidad = especialidad;
         this.correo = correo;
         this.horario_Inicio = horario_Inicio;
         this.horario_Fin = horario_Fin;
         this.inicio_trabajar = inicio_trabajar;
     }
 
+    public Doctor(String colegiado, String telefono, String especialidad, String correo, String horario_Inicio, String horario_Fin, Date inicio_trabajar, String codigo, String nombre, String dpi, String password) {
+        super(codigo, nombre, dpi, password);
+        this.colegiado = colegiado;
+        this.telefono = telefono;
+        this.especialidad = especialidad;
+        this.correo = correo;
+        this.horario_Inicio = horario_Inicio;
+        this.horario_Fin = horario_Fin;
+        this.inicio_trabajar = inicio_trabajar;
+    }
+    
     public String getColegiado() {
         return colegiado;
     }
