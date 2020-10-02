@@ -93,22 +93,23 @@ public class DoctorDAO {
     
     public Doctor listarId(String codDoctor){
         Doctor doc = new Doctor();
-        String sql = "SELECT * FROM Medico WHERE codigo ="+codDoctor;
+        String sql = "SELECT * FROM Medico WHERE codigo =?";
         try {
             acceso = conexion.Conectar();
             ps = acceso.prepareStatement(sql);
+            ps.setString(1, codDoctor);
             rs = ps.executeQuery();
             while(rs.next()){
-                doc.setCodigo(rs.getString(1));
-                doc.setNombre(rs.getString(2));
-                doc.setColegiado(rs.getString(3));
-                doc.setDpi(rs.getString(4));
-                doc.setTelefono(rs.getString(5));
-                doc.setCorreo(rs.getString(6));
-                doc.setHorario_Inicio(rs.getString(7));
-                doc.setHorario_Fin(rs.getString(8));
-                doc.setInicio_trabajar(rs.getDate(9));
-                doc.setPassword(rs.getString(10));
+                doc.setCodigo(rs.getString("codigo"));
+                doc.setNombre(rs.getString("nombre"));
+                doc.setColegiado(rs.getString("numero_colegiado"));
+                doc.setDpi(rs.getString("dpi"));
+                doc.setTelefono(rs.getString("telefono"));
+                doc.setCorreo(rs.getString("correo_electronico"));
+                doc.setHorario_Inicio(rs.getString("horario_inicio_trabajo"));
+                doc.setHorario_Fin(rs.getString("horario_fin_trabajo"));
+                doc.setInicio_trabajar(rs.getDate("fecha_inicio_trabajo"));
+                doc.setPassword(rs.getString("password"));
             }
         } catch (Exception e) {
         }

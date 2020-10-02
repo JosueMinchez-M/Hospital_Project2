@@ -233,7 +233,7 @@ public class ImportarXML {
                     especialidadDoctor.clear();
                 }else if(nombreTag.equals("laboratorista")){
                     laboratorista = new Laboratorista(capturarDatos.get(0), capturarDatos.get(1), capturarDatos.get(3), capturarDatos.get(7)
-                    ,capturarDatos.get(2), capturarDatos.get(5), capturarDatos.get(5), capturarDatos.get(6),
+                    ,capturarDatos.get(2), capturarDatos.get(4), capturarDatos.get(5), capturarDatos.get(6),
                     Date.valueOf(inicio_trabajo));
                     insertarLaboratorista();
                     for (int j = 0; j < diasDeTrabajoLaboratorista.size(); j++) {
