@@ -29,7 +29,7 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                       <a class="dropdown-item" href="Prueba?menu=ServicioConsultaDoctor&accion=Listar" target="frameAdministrador">Consultas Doctor</a>
-                    <a class="dropdown-item" href="AdminExamenesLaboratorio.jsp" target="frameAdministrador">Examenes Laboratorio</a>
+                    <a class="dropdown-item" href="Prueba?menu=AgregarExamenLab&accion=Listar" target="frameAdministrador">Examenes Laboratorio</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">

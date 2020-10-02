@@ -9,9 +9,11 @@ import com.mycompany.hospitalproject2.Consulta;
 import com.mycompany.hospitalproject2.DAO.ConsultaDAO;
 import com.mycompany.hospitalproject2.DAO.DoctorDAO;
 import com.mycompany.hospitalproject2.DAO.EspecialidadMedicoDAO;
+import com.mycompany.hospitalproject2.DAO.ExamenDAO;
 import com.mycompany.hospitalproject2.DAO.LaboratoristaDAO;
 import com.mycompany.hospitalproject2.Doctor;
 import com.mycompany.hospitalproject2.EspecialidadMedico;
+import com.mycompany.hospitalproject2.Examen;
 import com.mycompany.hospitalproject2.Laboratorista;
 import java.io.IOException;
 import java.sql.Date;
@@ -36,6 +38,7 @@ public class ControladorDB extends HttpServlet {
     LaboratoristaDAO laboratoristaDAO = new LaboratoristaDAO();
     EspecialidadMedicoDAO especialidadMedicoDAO = new EspecialidadMedicoDAO();
     ConsultaDAO consultaDAO = new ConsultaDAO();
+    ExamenDAO examenDAO = new ExamenDAO();
     String id;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -188,6 +191,42 @@ public class ControladorDB extends HttpServlet {
                     Consulta consul = new Consulta(id, costoA);
                     consultaDAO.actualizar(consul);
                     request.getRequestDispatcher("Prueba?menu=ServicioConsultaDoctor&accion=Listar").forward(request, response);
+                    break;
+            }
+        }else if(menu.equals("AgregarExamenLab")){
+            switch(accion){
+                case "Listar":
+                    List lista = examenDAO.listar();
+                    request.setAttribute("listaExamenLab", lista);
+                    request.getRequestDispatcher("AdminExamenesLaboratorio.jsp").forward(request, response);
+                    break;
+                case "Editar":
+                    id = request.getParameter("id");
+                    Examen ex = examenDAO.listarId(id);
+                    request.setAttribute("editarExamen", ex);
+                    request.getRequestDispatcher("Prueba?menu=AgregarExamenLab&accion=Listar").forward(request, response);
+                    break;
+                case "Agregar":
+                    String codigo = request.getParameter("txtCodigoEx");
+                    String tipoEx = request.getParameter("txtNombreEx");
+                    String orden = request.getParameter("txtOrdenEx");
+                    String descripcion = request.getParameter("txtDescripcionEx");
+                    double costo = Double.parseDouble(request.getParameter("txtCostoEx"));
+                    String informe = request.getParameter("txtInformeEx");
+                    Examen examen = new Examen(codigo, tipoEx, orden, descripcion, costo, informe);
+                    examenDAO.agregar(examen);
+                    request.getRequestDispatcher("Prueba?menu=AgregarExamenLab&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String codigoA = request.getParameter("txtCodigoEx");
+                    String tipoExA = request.getParameter("txtNombreEx");
+                    String ordenA = request.getParameter("txtOrdenEx");
+                    String descripcionA = request.getParameter("txtDescripcionEx");
+                    double costoA = Double.parseDouble(request.getParameter("txtCostoEx"));
+                    String informeA = request.getParameter("txtInformeEx");
+                    Examen examenA = new Examen(codigoA, tipoExA, ordenA, descripcionA, costoA, informeA);
+                    examenDAO.actualizar(examenA);
+                    request.getRequestDispatcher("Prueba?menu=AgregarExamenLab&accion=Listar").forward(request, response);
                     break;
             }
         }

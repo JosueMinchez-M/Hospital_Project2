@@ -30,25 +30,48 @@ public class Examen {
         return codigo;
     }
 
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
     public String getNombre() {
         return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getOrden() {
         return orden;
     }
 
+    public void setOrden(String orden) {
+        this.orden = orden;
+    }
+
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public double getCosto() {
         return costo;
     }
 
+    public void setCosto(double costo) {
+        this.costo = costo;
+    }
+
     public String getInforme() {
         return informe;
     }
-    
+
+    public void setInforme(String informe) {
+        this.informe = informe;
+    }
     
 }
