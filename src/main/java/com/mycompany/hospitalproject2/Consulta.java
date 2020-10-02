@@ -9,6 +9,9 @@ public class Consulta {
     private String tipo;
     private int costo;
 
+    public Consulta(){
+        
+    }
     public Consulta(String tipo, int costo) {
         this.tipo = tipo;
         this.costo = costo;
@@ -18,9 +21,16 @@ public class Consulta {
         return tipo;
     }
 
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public int getCosto() {
         return costo;
     }
-    
+
+    public void setCosto(int costo) {
+        this.costo = costo;
+    }
     
 }

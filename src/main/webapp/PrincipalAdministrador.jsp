@@ -25,29 +25,21 @@
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Precio Servicios
+                    Agregar/Modificar Servicios
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="AdminPrecioConsultaDoctor.jsp" target="frameAdministrador">Precio Consulta Doctor</a>
-                    <a class="dropdown-item" href="AdminPrecioExamenLaboratorista.jsp" target="frameAdministrador">Precio Examenes Laboratorio</a>
+                      <a class="dropdown-item" href="Prueba?menu=ServicioConsultaDoctor&accion=Listar" target="frameAdministrador">Consultas Doctor</a>
+                    <a class="dropdown-item" href="AdminExamenesLaboratorio.jsp" target="frameAdministrador">Examenes Laboratorio</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Agregar Personal
+                    Agregar/Modificar Personal y Especialidad
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="Prueba?menu=AgregarDoctor&accion=Listar" target="frameAdministrador">Doctor</a>
+                    <a class="dropdown-item" href="Prueba?menu=AgregarEspecialidad&accion=Listar" target="frameAdministrador">Especialidad Doctor</a>
                     <a class="dropdown-item" href="Prueba?menu=AgregarLaboratorista&accion=Listar" target="frameAdministrador">Laboratorista</a>
-                  </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Crear Servicios
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="AdminCrearNuevaConsulta.jsp" target="frameAdministrador">Nueva Consulta Doctor</a>
-                    <a class="dropdown-item" href="AdminCrearNuevoExamenLab.jsp" target="frameAdministrador">Nuevo Examen Laboratorista</a>
                   </div>
                 </li>
                 <li class="nav-item">

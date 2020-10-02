@@ -5,9 +5,13 @@
  */
 package com.mycompany.hospitalproject2.Controlador;
 
+import com.mycompany.hospitalproject2.Consulta;
+import com.mycompany.hospitalproject2.DAO.ConsultaDAO;
 import com.mycompany.hospitalproject2.DAO.DoctorDAO;
+import com.mycompany.hospitalproject2.DAO.EspecialidadMedicoDAO;
 import com.mycompany.hospitalproject2.DAO.LaboratoristaDAO;
 import com.mycompany.hospitalproject2.Doctor;
+import com.mycompany.hospitalproject2.EspecialidadMedico;
 import com.mycompany.hospitalproject2.Laboratorista;
 import java.io.IOException;
 import java.sql.Date;
@@ -30,6 +34,8 @@ public class ControladorDB extends HttpServlet {
     DoctorDAO doctorDAO = new DoctorDAO();
     Laboratorista lab;
     LaboratoristaDAO laboratoristaDAO = new LaboratoristaDAO();
+    EspecialidadMedicoDAO especialidadMedicoDAO = new EspecialidadMedicoDAO();
+    ConsultaDAO consultaDAO = new ConsultaDAO();
     String id;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -133,6 +139,55 @@ public class ControladorDB extends HttpServlet {
                     lab = new Laboratorista(id, nombreA, dpiA, passA, numRegistroA, telA, tipoExamenA, correoA, Date.valueOf(fechaInicioA));
                     laboratoristaDAO.actualizar(lab);
                     request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
+                    break;
+            }
+        }else if(menu.equals("AgregarEspecialidad")){
+            switch(accion){
+                case "Listar":
+                    List lista = especialidadMedicoDAO.listar();
+                    request.setAttribute("listaEspecialidadDoctor", lista);
+                    request.getRequestDispatcher("AdminAgregarEspecialidad.jsp").forward(request, response);
+                    break;
+                case "Buscar":
+                    id = request.getParameter("txtBuscarDocEsp");
+                    Doctor doc = doctorDAO.listarId(id);
+                    request.setAttribute("buscarDoctorEs", doc);
+                    request.getRequestDispatcher("Prueba?menu=AgregarEspecialidad&accion=Listar").forward(request, response);
+                    break;
+                case "Agregar":
+                    String codigo = request.getParameter("txtCodigoDoc");
+                    String especialidad = request.getParameter("txtEspecialidadDoc");
+                    EspecialidadMedico especialidadMedico = new EspecialidadMedico(codigo, especialidad);
+                    especialidadMedicoDAO.agregar(especialidadMedico);
+                    request.getRequestDispatcher("Prueba?menu=AgregarEspecialidad&accion=Listar").forward(request, response);
+                    break;
+            }
+        }else if(menu.equals("ServicioConsultaDoctor")){
+            switch(accion){
+                case "Listar":
+                    List lista = consultaDAO.listar();
+                    request.setAttribute("listaConsulta", lista);
+                    request.getRequestDispatcher("AdminConsultaDoctor.jsp").forward(request, response);
+                    break;
+                case "Editar":
+                    id = request.getParameter("id");
+                    Consulta consulta = consultaDAO.listarId(id);
+                    request.setAttribute("editarConsulta", consulta);
+                    request.getRequestDispatcher("Prueba?menu=ServicioConsultaDoctor&accion=Listar").forward(request, response);
+                    break;
+                case "Agregar":
+                    String tipo = request.getParameter("txtTipoConsulta");
+                    int costo = Integer.parseInt(request.getParameter("txtCostoConsulta"));
+                    Consulta consult = new Consulta(tipo, costo);
+                    consultaDAO.agregar(consult);
+                    request.getRequestDispatcher("Prueba?menu=ServicioConsultaDoctor&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    //String tipo = request.getParameter("txtTipoConsulta");
+                    int costoA = Integer.parseInt(request.getParameter("txtCostoConsulta"));
+                    Consulta consul = new Consulta(id, costoA);
+                    consultaDAO.actualizar(consul);
+                    request.getRequestDispatcher("Prueba?menu=ServicioConsultaDoctor&accion=Listar").forward(request, response);
                     break;
             }
         }

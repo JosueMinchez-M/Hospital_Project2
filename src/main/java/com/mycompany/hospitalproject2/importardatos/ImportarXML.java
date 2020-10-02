@@ -42,8 +42,8 @@ public class ImportarXML {
     String[] nombreTag = {"admin", "doctor", "laboratorista", "paciente", "examen", "reporte", "resultado", 
         "cita", "consulta"};
     ArrayList<String> capturarDatos = new ArrayList<String>();
-    ArrayList<String> especialidadDoctor = new ArrayList<String>();
-    ArrayList<String> diasDeTrabajoLaboratorista = new ArrayList<String>();
+     ArrayList<String> especialidadDoctor = new ArrayList<String>();
+     ArrayList<String> diasDeTrabajoLaboratorista = new ArrayList<String>();
     Administrador administrador;
     Doctor doctor;
     EspecialidadMedico especialidadMedico;
@@ -225,15 +225,13 @@ public class ImportarXML {
                     capturarDatos.get(6), capturarDatos.get(7), Date.valueOf(inicio_trabajo));
                     insertarMedico();
                     for (int j = 0; j < especialidadDoctor.size(); j++) {
-                        especialidadMedico = new EspecialidadMedico(doctor.getCodigo(), doctor.getNombre(), doctor.getColegiado(),
-                        doctor.getDpi(), doctor.getTelefono(), doctor.getCorreo(), doctor.getHorario_Inicio(), doctor.getHorario_Fin(),
-                        doctor.getInicio_trabajar(), especialidadDoctor.get(j));
+                        especialidadMedico = new EspecialidadMedico(doctor.getCodigo(),especialidadDoctor.get(j));
                         insertarEspecialidadMedico();
                     }
                     especialidadDoctor.clear();
                 }else if(nombreTag.equals("laboratorista")){
                     laboratorista = new Laboratorista(capturarDatos.get(0), capturarDatos.get(1), capturarDatos.get(3), capturarDatos.get(7)
-                    ,capturarDatos.get(2), capturarDatos.get(4), capturarDatos.get(5), capturarDatos.get(6),
+                    ,capturarDatos.get(2), capturarDatos.get(5), capturarDatos.get(5), capturarDatos.get(6),
                     Date.valueOf(inicio_trabajo));
                     insertarLaboratorista();
                     for (int j = 0; j < diasDeTrabajoLaboratorista.size(); j++) {
@@ -310,22 +308,13 @@ public class ImportarXML {
         }
     }
     public void insertarEspecialidadMedico(){
-        String sql = "INSERT INTO especialidad_medico (Medico_codigo, nombre, numero_colegiado, dpi, telefono, correo_electronico, "
-                + "horario_inicio_trabajo, horario_fin_trabajo, fecha_inicio_trabajo, Especialidad_titulo) "
-                + "VALUES(?, ? , ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO especialidad_medico (Medico_codigo, Especialidad_titulo) "
+                + "VALUES(?, ?)";
         try {
             acceso = con.Conectar();
             ps = acceso.prepareStatement(sql);
             ps.setString(1, especialidadMedico.getCodigo_medico());
-            ps.setString(2, especialidadMedico.getNombre());
-            ps.setString(3, especialidadMedico.getNumeroColegiado());
-            ps.setString(4, especialidadMedico.getDpi());
-            ps.setString(5, especialidadMedico.getTelefono());
-            ps.setString(6, especialidadMedico.getCorreo());
-            ps.setString(7, especialidadMedico.getHorarioInicioTrabajo());
-            ps.setString(8, especialidadMedico.getHorarioFinTrabajo());
-            ps.setDate(9, especialidadMedico.getFechaInicioTrabajo());
-            ps.setString(10, especialidadMedico.getEspecialidad());
+            ps.setString(2, especialidadMedico.getEspecialidad());
             int res = ps.executeUpdate();
             if(res > 0){
                 //JOptionPane.showMessageDialog(null, "GUARDADO CON EXITO");
