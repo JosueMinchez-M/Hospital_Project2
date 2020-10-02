@@ -116,7 +116,7 @@ public class DoctorDAO {
         return doc;
     }
     public int actualizar(Doctor doc){
-        String sql = "UPDATE Medico nombre=?, numero_colegiado=?, dpi=?, telefono=?, correo_electronico=?, "
+        String sql = "UPDATE Medico SET nombre=?, numero_colegiado=?, dpi=?, telefono=?, correo_electronico=?, "
                 + "horario_inicio_trabajo=?, horario_fin_trabajo=?, fecha_inicio_trabajo=?, password=? WHERE codigo=?";
         try {
             acceso = conexion.Conectar();

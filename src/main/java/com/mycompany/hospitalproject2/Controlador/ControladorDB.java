@@ -30,7 +30,7 @@ public class ControladorDB extends HttpServlet {
     DoctorDAO doctorDAO = new DoctorDAO();
     Laboratorista lab;
     LaboratoristaDAO laboratoristaDAO = new LaboratoristaDAO();
-    String idLaboratorista;
+    String id;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -68,6 +68,28 @@ public class ControladorDB extends HttpServlet {
                     doctorDAO.agregar(docConst);
                     request.getRequestDispatcher("Prueba?menu=AgregarDoctor&accion=Listar").forward(request, response);
                     break;
+                    case "Editar":
+                    id = request.getParameter("id");
+                    Doctor doc = doctorDAO.listarId(id);
+                    request.setAttribute("editarDoctor", doc);
+                    request.getRequestDispatcher("Prueba?menu=AgregarDoctor&accion=Listar").forward(request, response);
+                    break;
+                    case "Actualizar":
+                    String codigoA = request.getParameter("txtCodigoDoc");
+                    String nombreA = request.getParameter("txtNombreDoc");
+                    String colegiadoA = request.getParameter("txtColegiadoDoc");
+                    String dpiA = request.getParameter("txtDpiDoc");
+                    String telA = request.getParameter("txtTelDoc");
+                    String correoA = request.getParameter("txtCorreoDoc");
+                    String horEntradaA = request.getParameter("txtHIDoc");
+                    String horSalidaA = request.getParameter("txtHSDoc");
+                    String fechaInicioA = request.getParameter("txtITDoc");
+                    String passA = request.getParameter("txtPassDoc");
+                    String especialidadA = request.getParameter("");
+                    docConst = new Doctor(colegiadoA, telA, especialidadA, correoA, horEntradaA, horSalidaA, Date.valueOf(fechaInicioA), codigoA, nombreA, dpiA, passA);
+                    doctorDAO.actualizar(docConst);
+                    request.getRequestDispatcher("Prueba?menu=AgregarDoctor&accion=Listar").forward(request, response);
+                    break;
             }
             //request.getRequestDispatcher("Prueba1.jsp").forward(request, response);
         }else if(menu.equals("AgregarLaboratorista")){
@@ -93,8 +115,8 @@ public class ControladorDB extends HttpServlet {
                     request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
                     break;
                 case "Editar":
-                    idLaboratorista = request.getParameter("id");
-                    Laboratorista lab = laboratoristaDAO.listarId(idLaboratorista);
+                    id = request.getParameter("id");
+                    Laboratorista lab = laboratoristaDAO.listarId(id);
                     request.setAttribute("editarLaboratorista", lab);
                     request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
                     break;
@@ -108,7 +130,7 @@ public class ControladorDB extends HttpServlet {
                     String correoA = request.getParameter("txtCorreoLab");
                     String fechaInicioA = request.getParameter("txtITLab");
                     String passA = request.getParameter("txtPassLab");
-                    lab = new Laboratorista(idLaboratorista, nombreA, dpiA, passA, numRegistroA, telA, tipoExamenA, correoA, Date.valueOf(fechaInicioA));
+                    lab = new Laboratorista(id, nombreA, dpiA, passA, numRegistroA, telA, tipoExamenA, correoA, Date.valueOf(fechaInicioA));
                     laboratoristaDAO.actualizar(lab);
                     request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
                     break;

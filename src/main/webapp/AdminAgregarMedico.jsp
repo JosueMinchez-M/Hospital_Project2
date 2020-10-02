@@ -35,46 +35,46 @@
                     <form action="Prueba?menu=AgregarDoctor&accion=Agregar" method="POST">
                         <div class="row">
                           <div class="col">
-                            <input type="text" name="txtCodigoDoc" class="form-control" placeholder="Código(obligatorio)">
+                            <input type="text" value="${editarDoctor.getCodigo()}" name="txtCodigoDoc" class="form-control" placeholder="Código(obligatorio)">
                           </div>
                           <div class="col">
-                            <input type="text" name="txtNombreDoc" class="form-control" placeholder="Nombre(obligatorio)">
+                            <input type="text" value="${editarDoctor.getNombre()}" name="txtNombreDoc" class="form-control" placeholder="Nombre(obligatorio)">
                           </div>
                           <div class="col">
-                            <input type="text" name="txtColegiadoDoc" class="form-control" placeholder="No. Colegiado(obligatorio)">
+                            <input type="text" value="${editarDoctor.getColegiado()}" name="txtColegiadoDoc" class="form-control" placeholder="No. Colegiado(obligatorio)">
                           </div>
                           <div class="col">
-                            <input type="text" name="txtDpiDoc" class="form-control" placeholder="Dpi(obligatorio)">
-                          </div>
-                        </div>
-                        </br>
-                        <div class="row">
-                          <div class="col">
-                            <input type="text" name="txtTelDoc" class="form-control" placeholder="Telefono">
-                          </div>
-                          <div class="col">
-                            <input type="text" name="txtCorreoDoc" class="form-control" placeholder="Correo Electronico">
-                          </div>
-                          <div class="col">
-                            <input type="text" name="txtHIDoc" class="form-control" placeholder="Hora Ingreso(HH:MM)">
-                          </div>
-                          <div class="col">
-                            <input type="text" name="txtHSDoc" class="form-control" placeholder="Hora Salida(HH:MM)">
+                            <input type="text" value="${editarDoctor.getDpi()}" name="txtDpiDoc" class="form-control" placeholder="Dpi(obligatorio)">
                           </div>
                         </div>
                         </br>
                         <div class="row">
                           <div class="col">
-                            <input type="text" name="txtITDoc" class="form-control" placeholder="Fecha que Inicio Trabajar">
+                            <input type="text" value="${editarDoctor.getTelefono()}" name="txtTelDoc" class="form-control" placeholder="Telefono">
                           </div>
                           <div class="col">
-                            <input type="password" name="txtPassDoc" class="form-control" placeholder="Contraseña(obligatorio)">
+                            <input type="text" value="${editarDoctor.getCorreo()}" name="txtCorreoDoc" class="form-control" placeholder="Correo Electronico">
                           </div>
                           <div class="col">
-                            <input type="hidden" name="txtEspecialidadDoc" class="form-control" placeholder="Especialidad">
+                            <input type="text" value="${editarDoctor.getHorario_Inicio()}" name="txtHIDoc" class="form-control" placeholder="Hora Ingreso(HH:MM)">
                           </div>
                           <div class="col">
-                              <input type="submit" class="btn btn-primary" name="accion" value="Registrar">
+                            <input type="text" value="${editarDoctor.getHorario_Fin()}" name="txtHSDoc" class="form-control" placeholder="Hora Salida(HH:MM)">
+                          </div>
+                        </div>
+                        </br>
+                        <div class="row">
+                          <div class="col">
+                            <input type="text" value="${editarDoctor.getInicio_trabajar()}" name="txtITDoc" class="form-control" placeholder="Fecha que Inicio Trabajar">
+                          </div>
+                          <div class="col">
+                            <input type="password" value="${editarDoctor.getPassword()}" name="txtPassDoc" class="form-control" placeholder="Contraseña(obligatorio)">
+                          </div>
+                          <div class="col">
+                            <input type="submit" class="btn btn-primary" name="accion" value="Registrar">
+                          </div>
+                          <div class="col">
+                              <input type="submit" class="btn btn-success" name="accion" value="Actualizar" formaction="Prueba?menu=AgregarDoctor&accion=Actualizar">
                           </div>
                         </div>
                         </br>
@@ -114,7 +114,7 @@
                                 <td>${doc.getInicio_trabajar()}</td>
                                 <td>${doc.getPassword()}</td>
                                 <td>
-                                    <a>Editar</a>
+                                    <a class="btn btn-warning" href="Prueba?menu=AgregarDoctor&accion=Editar&id=${doc.getCodigo()}">Editar</a>
                                 </td>
                             </tr>
                         </c:forEach>    
