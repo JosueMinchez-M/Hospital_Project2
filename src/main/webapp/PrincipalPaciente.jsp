@@ -42,8 +42,13 @@
                     Citas Pendientes
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="PacienteCitaPendienteMedico.jsp" target="framePaciente">Médico</a>
-                    <a class="dropdown-item" href="PacienteCitaPendienteLaboratorio.jsp" target="framePaciente">Laboratorio</a>
+                      <form action ="ControladorPacienteDB?menu=CitaPendiente&accion=ListarCita" method="POST">
+                      <input type="hidden" value="<%out.println(request.getAttribute("codigoPaciente"));%>" name="txtCodigotx" class="form-control">
+                      <input type="submit" class="dropdown-item" name="accion" formtarget="framePaciente" value="Doctor" formaction="ControladorPacienteDB?menu=CitaPendienteDoctor&accion=ListarCita">
+                      <input type="submit" class="dropdown-item" name="accion" formtarget="framePaciente" value="Laboratorio">
+                      </form>
+                    <!--<a class="dropdown-item" href="PacienteCitaPendienteMedico.jsp" target="framePaciente">Médico</a>
+                    <a class="dropdown-item" href="PacienteCitaPendienteLaboratorio.jsp" target="framePaciente">Laboratorio</a>\-->
                   </div>
                 </li>
                 <li class="nav-item">

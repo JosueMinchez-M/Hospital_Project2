@@ -138,6 +138,24 @@ public class ControladorPacienteDB extends HttpServlet {
                     request.getRequestDispatcher("ControladorPacienteDB?menu=AgendarCitaExamenLab&accion=Listar").forward(request, response);
                     break;
             }
+        }else if(menu.equals("CitaPendiente")){
+            switch(accion){
+                case "ListarCita":
+                    String prueba = request.getParameter("txtCodigotx");
+                    request.setAttribute("prueb", prueba.replaceAll("\\r|\\n", ""));
+                    List lista = citaLaboratoristaDAO.listar(prueba);
+                    request.setAttribute("listaCitaPendiente", lista);
+                    request.getRequestDispatcher("PacienteCitaPendienteLaboratorio.jsp").forward(request, response);
+                    break;
+            }
+        }else if(menu.equals("CitaPendienteDoctor")){
+            switch(accion){
+                case "ListarCita":
+                    String prueba = request.getParameter("txtCodigotx");
+                    request.setAttribute("prueb", prueba.replaceAll("\n", ""));
+                    request.getRequestDispatcher("PacienteCitaPendienteMedico.jsp").forward(request, response);
+                    break;
+            }
         }
     }
     public int generarNumero(){
