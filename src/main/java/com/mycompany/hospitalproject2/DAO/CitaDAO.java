@@ -1,11 +1,14 @@
 package com.mycompany.hospitalproject2.DAO;
 
 import com.mycompany.hospitalproject2.Cita;
+import com.mycompany.hospitalproject2.CitaLaboratorista;
 import com.mycompany.hospitalproject2.Doctor;
 import com.mycompany.hospitalproject2.conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -34,5 +37,27 @@ public class CitaDAO {
         } catch (Exception e) {
         }
         return respuesta;
+    }
+    public List listar(String codigoCitaDoc){
+        String sql = "SELECT * FROM Cita WHERE Paciente_codigo= '"+codigoCitaDoc.replaceAll("\\r|\\n", "")+"' "
+                + "AND DATE(fecha_consulta) >= DATE(NOW())";
+        List <Cita>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Cita cit = new Cita();
+                cit.setCodigo(rs.getString(1));
+                cit.setEspecialidad(rs.getString(2));
+                cit.setFecha(rs.getDate(3));
+                cit.setHora(rs.getString(4));
+                cit.setPaciente(rs.getString(5));
+                cit.setMedico(rs.getString(6));
+                lista.add(cit);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
     }
 }

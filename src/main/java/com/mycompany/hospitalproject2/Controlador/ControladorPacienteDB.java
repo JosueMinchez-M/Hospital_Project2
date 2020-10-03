@@ -153,6 +153,8 @@ public class ControladorPacienteDB extends HttpServlet {
                 case "ListarCita":
                     String prueba = request.getParameter("txtCodigotx");
                     request.setAttribute("prueb", prueba.replaceAll("\n", ""));
+                    List lista = citaDAO.listar(prueba);
+                    request.setAttribute("listaCitaPendiente", lista);
                     request.getRequestDispatcher("PacienteCitaPendienteMedico.jsp").forward(request, response);
                     break;
             }
