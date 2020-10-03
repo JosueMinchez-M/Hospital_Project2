@@ -1,6 +1,5 @@
 package com.mycompany.hospitalproject2.DAO;
 
-import com.mycompany.hospitalproject2.Doctor;
 import com.mycompany.hospitalproject2.Examen;
 import com.mycompany.hospitalproject2.conexion.Conexion;
 import java.sql.Connection;

@@ -6,8 +6,12 @@
 package com.mycompany.hospitalproject2.Controlador;
 
 import com.mycompany.hospitalproject2.Cita;
+import com.mycompany.hospitalproject2.CitaLaboratorista;
 import com.mycompany.hospitalproject2.DAO.CitaDAO;
+import com.mycompany.hospitalproject2.DAO.ConsultaDAO;
 import com.mycompany.hospitalproject2.DAO.EspecialidadMedicoDAO;
+import com.mycompany.hospitalproject2.DAO.ExamenDAO;
+import com.mycompany.hospitalproject2.DAO.LaboratoristaDAO;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
@@ -25,6 +29,10 @@ import javax.servlet.http.HttpServletResponse;
 public class ControladorPacienteDB extends HttpServlet {
     EspecialidadMedicoDAO especialidadMedicoDAO = new EspecialidadMedicoDAO();
     CitaDAO citaDAO = new CitaDAO();
+    LaboratoristaDAO laboratoristaDAO = new LaboratoristaDAO();
+    ExamenDAO examenDAO = new ExamenDAO();
+    CitaLaboratoristaDAO citaLaboratoristaDAO = new CitaLaboratoristaDAO();
+    ConsultaDAO consultaDAO = new ConsultaDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,18 +51,24 @@ public class ControladorPacienteDB extends HttpServlet {
                 case "Listar":
                     List lista = especialidadMedicoDAO.listarInfoMedico();
                     request.setAttribute("listaEspecialidadDoctorJoin", lista);
+                    List listaConsulta = consultaDAO.listar();
+                    request.setAttribute("listaConsulta", listaConsulta);
                     request.getRequestDispatcher("PacienteCitaConsultaMedico.jsp").forward(request, response);
                     break;
                 case "BuscarNombre":
                     String datoBuscarPorNombre = request.getParameter("txtBuscarNombreDoctor");
                     List listarTabNombre = especialidadMedicoDAO.listarTablaNombres(datoBuscarPorNombre);
                     request.setAttribute("listaEspecialidadDoctorJoin", listarTabNombre);
+                    List listaConsultaN = consultaDAO.listar();
+                    request.setAttribute("listaConsulta", listaConsultaN);
                     request.getRequestDispatcher("PacienteCitaConsultaMedico.jsp").forward(request, response);
                     break;
                 case "BuscarEspecialidad":
                     String datoBuscarPorEspecialidad = request.getParameter("txtBuscarEspDoctor");
                     List listarTabEspecialidad = especialidadMedicoDAO.listarTablaEsp(datoBuscarPorEspecialidad);
                     request.setAttribute("listaEspecialidadDoctorJoin", listarTabEspecialidad);
+                    List listaConsultaE = consultaDAO.listar();
+                    request.setAttribute("listaConsulta", listaConsultaE);
                     request.getRequestDispatcher("PacienteCitaConsultaMedico.jsp").forward(request, response);
                     break;
                 case "BuscarRangoFecha":
@@ -62,6 +76,8 @@ public class ControladorPacienteDB extends HttpServlet {
                     String datoBuscarPorFechaMayor = request.getParameter("txtBuscarFechaMayorMedic");
                     List listarTabFecha = especialidadMedicoDAO.listarTablaFecha( datoBuscarPorFechaMenor, datoBuscarPorFechaMayor);
                     request.setAttribute("listaEspecialidadDoctorJoin", listarTabFecha);
+                    List listaConsultaR = consultaDAO.listar();
+                    request.setAttribute("listaConsulta", listaConsultaR);
                     request.getRequestDispatcher("PacienteCitaConsultaMedico.jsp").forward(request, response);
                     break;
                 case "AgregarCita":
@@ -75,14 +91,52 @@ public class ControladorPacienteDB extends HttpServlet {
                     citaDAO.agregar(cita);
                     request.getRequestDispatcher("ControladorPacienteDB?menu=AgendarCitaDoctor&accion=Listar").forward(request, response);
                     break;
-//                case "Editar":
-//                    id = request.getParameter("id");
-//                    Doctor doc = doctorDAO.listarId(id);
-//                    EspecialidadMedico eM = especialidadMedicoDAO.listarId(id);
-//                    request.setAttribute("editarDatosEspDoctor", eM);
-//                    request.setAttribute("editarDoctor", doc);
-//                    request.getRequestDispatcher("ControladorPacienteDB?menu=AgendarCitaDoctor&accion=Listar").forward(request, response);
-//                    break;
+            }
+        }else if(menu.equals("AgendarCitaExamenLab")){
+            switch(accion){
+                case "Listar":
+                    List lista = laboratoristaDAO.listar();
+                    request.setAttribute("listaLaboratorista", lista);
+                    List listaEx = examenDAO.listar();
+                    request.setAttribute("listaExamen", listaEx);
+                    request.getRequestDispatcher("PacienteCitaExamenLaboratorio.jsp").forward(request, response);
+                    break;
+                case "BuscarNombre":
+                    String datoBuscarPorNombre = request.getParameter("txtBuscarNombreLab");
+                    List listarTabNombre = laboratoristaDAO.listarTablaNombres(datoBuscarPorNombre);
+                    request.setAttribute("listaLaboratorista", listarTabNombre);
+                    List listaExN = examenDAO.listar();
+                    request.setAttribute("listaExamen", listaExN);
+                    request.getRequestDispatcher("PacienteCitaExamenLaboratorio.jsp").forward(request, response);
+                    break;
+                case "BuscarExamen":
+                    String datoBuscarPorExamen = request.getParameter("txtBuscarTipoExLab");
+                    List listarTabEspecialidad = laboratoristaDAO.listarTablaExam(datoBuscarPorExamen);
+                    request.setAttribute("listaLaboratorista", listarTabEspecialidad);
+                    List listaExE = examenDAO.listar();
+                    request.setAttribute("listaExamen", listaExE);
+                    request.getRequestDispatcher("PacienteCitaExamenLaboratorio.jsp").forward(request, response);
+                    break;
+                case "BuscarRangoFecha":
+                    String datoBuscarPorFechaMenor = request.getParameter("txtBuscarFechaMenorLab");
+                    String datoBuscarPorFechaMayor = request.getParameter("txtBuscarFechaMayorLab");
+                    List listarTabFecha = laboratoristaDAO.listarTablaRangoFech(datoBuscarPorFechaMenor, datoBuscarPorFechaMayor);
+                    request.setAttribute("listaLaboratorista", listarTabFecha);
+                    List listaExR = examenDAO.listar();
+                    request.setAttribute("listaExamen", listaExR);
+                    request.getRequestDispatcher("PacienteCitaExamenLaboratorio.jsp").forward(request, response);
+                    break;
+                case "AgregarCita":
+                    String codExamen = request.getParameter("txtExamenCita");
+                    String fechaCita = request.getParameter("txtFechaCita");
+                    String horaCita = request.getParameter("txtHoraCita");
+                    String codigoPaciente = request.getParameter("txtCodigoPacienteCita");
+                    String codigoLab = request.getParameter("txtCodigoLaboratoristaCita");
+                    String codigo = String.valueOf(generarNumero());
+                    CitaLaboratorista citaLab = new CitaLaboratorista(codigo, codExamen, Date.valueOf(fechaCita), horaCita, codigoPaciente, codigoLab);
+                    citaLaboratoristaDAO.agregar(citaLab);
+                    request.getRequestDispatcher("ControladorPacienteDB?menu=AgendarCitaExamenLab&accion=Listar").forward(request, response);
+                    break;
             }
         }
     }

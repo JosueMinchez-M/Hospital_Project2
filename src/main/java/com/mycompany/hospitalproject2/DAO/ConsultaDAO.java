@@ -1,7 +1,6 @@
 package com.mycompany.hospitalproject2.DAO;
 
 import com.mycompany.hospitalproject2.Consulta;
-import com.mycompany.hospitalproject2.Doctor;
 import com.mycompany.hospitalproject2.conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

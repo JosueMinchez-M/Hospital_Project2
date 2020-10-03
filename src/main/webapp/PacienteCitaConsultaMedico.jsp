@@ -86,6 +86,28 @@
             </div>
             </br>
             </br>
+            <h2 class="text-center">Informacion Consultas</h2>
+            <div class="scrollableTabla">
+
+                <table class="table table-bordered table-striped mb-0">
+                  <thead class="thead-dark">
+                    <tr>
+                        <th>Tipo Consulta</th>
+                        <th>Costo</th>
+                    </tr>
+                  </thead>
+                    <tbody>
+                        <c:forEach var="listCon" items="${listaConsulta}">
+                            <tr>
+                                <th>${listCon.getTipo()}</th>
+                                <td>${listCon.getCosto()}</td>
+                            </tr>
+                        </c:forEach>    
+                    </tbody>
+                </table>
+            </div>
+            </br>
+            </br>
                 <div>
                     <form action="ControladorPacienteDB?menu=AgendarCitaDoctor&accion=AgregarCita" method="POST">
                         <div class="row">
@@ -111,7 +133,7 @@
                               <input type="submit" class="btn btn-primary" name="accion" value="Registrar">
                           </div>
                           <div class="col">
-                            <input type="submit" class="btn btn-success" name="accion" value="Actualizar" formaction="Prueba?menu=AgregarDoctor&accion=Actualizar">
+                            <input type="hidden" class="btn btn-success" name="accion" value="Actualizar" formaction="Prueba?menu=AgregarDoctor&accion=Actualizar">
                           </div>
                           <div class="col">
                               <input type="hidden" name="txtCodigoDoctorCita" class="form-control" placeholder="Codigo Doctor">

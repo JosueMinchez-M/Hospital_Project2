@@ -132,4 +132,76 @@ public class LaboratoristaDAO {
         }
         return respuesta;
     }
+    public List listarTablaNombres(String datoBuscarNombre){
+        String sql = "SELECT codigo, nombre, numero_registro_MS, dpi, "
+                + "examen_realiza, correo_electronico, fecha_inicio_a_trabajar FROM Laboratorista "
+                + "WHERE (UPPER(nombre) LIKE UPPER('%"+datoBuscarNombre+"%'))";
+        List <Laboratorista>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Laboratorista lab = new Laboratorista();
+                lab.setCodigo(rs.getString(1));
+                lab.setNombre(rs.getString(2));
+                lab.setNumero_registro(rs.getString(3));
+                lab.setDpi(rs.getString(4));
+                lab.setExamen_realizar(rs.getString(5));
+                lab.setCorreo(rs.getString(6));
+                lab.setFecha_trabajar(rs.getDate(7));
+                lista.add(lab);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    public List listarTablaExam(String datoBuscarNombre){
+        String sql = "SELECT codigo, nombre, numero_registro_MS, dpi, "
+                + "examen_realiza, correo_electronico, fecha_inicio_a_trabajar FROM Laboratorista "
+                + "WHERE (UPPER(examen_realiza) LIKE UPPER('%"+datoBuscarNombre+"%'))";
+        List <Laboratorista>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Laboratorista lab = new Laboratorista();
+                lab.setCodigo(rs.getString(1));
+                lab.setNombre(rs.getString(2));
+                lab.setNumero_registro(rs.getString(3));
+                lab.setDpi(rs.getString(4));
+                lab.setExamen_realizar(rs.getString(5));
+                lab.setCorreo(rs.getString(6));
+                lab.setFecha_trabajar(rs.getDate(7));
+                lista.add(lab);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    public List listarTablaRangoFech(String fechaMenor, String fechaMayor){
+        String sql = "SELECT codigo, nombre, numero_registro_MS, dpi, "
+                + "examen_realiza, correo_electronico, fecha_inicio_a_trabajar FROM Laboratorista "
+                + "WHERE fecha_inicio_a_trabajar BETWEEN '"+fechaMenor+"' AND '"+fechaMayor+"'";
+        List <Laboratorista>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Laboratorista lab = new Laboratorista();
+                lab.setCodigo(rs.getString(1));
+                lab.setNombre(rs.getString(2));
+                lab.setNumero_registro(rs.getString(3));
+                lab.setDpi(rs.getString(4));
+                lab.setExamen_realizar(rs.getString(5));
+                lab.setCorreo(rs.getString(6));
+                lab.setFecha_trabajar(rs.getDate(7));
+                lista.add(lab);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
 }
