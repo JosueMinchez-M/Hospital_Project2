@@ -104,7 +104,6 @@
                     <tr>
                         <th>Código</th>
                         <th>Especialidad</th>
-                        <th>Accion</th>
                     </tr>
                   </thead>
                     <tbody>

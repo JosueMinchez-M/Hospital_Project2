@@ -33,7 +33,7 @@
                     Agendar Cita
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="PacienteCitaConsultaMedico.jsp" target="framePaciente" target="framePaciente2">Consulta Médico</a>
+                      <a class="dropdown-item" href="ControladorPacienteDB?menu=AgendarCitaDoctor&accion=Listar" target="framePaciente" target="framePaciente2">Consulta Médico</a>
                     <a class="dropdown-item" href="PacienteCitaExamenLaboratorio.jsp" target="framePaciente">Examen Laboratorio</a>
                   </div>
                 </li>

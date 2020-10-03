@@ -17,7 +17,6 @@ import com.mycompany.hospitalproject2.Examen;
 import com.mycompany.hospitalproject2.Laboratorista;
 import java.io.IOException;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

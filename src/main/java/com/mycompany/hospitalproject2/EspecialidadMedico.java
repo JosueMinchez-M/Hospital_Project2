@@ -12,6 +12,9 @@ public class EspecialidadMedico {
         
     }
 
+    public EspecialidadMedico(){
+        
+    }
     public EspecialidadMedico(String codigo_medico, String especialidad) {
         this.codigo_medico = codigo_medico;
         this.especialidad = especialidad;
