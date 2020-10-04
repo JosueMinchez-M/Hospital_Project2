@@ -58,7 +58,7 @@
               <a class="dropdown-item" href="#"><%out.println(request.getAttribute("codigoLaboratorista"));%></a>
               <div>
                   <form action ="ValidarLaboratorista" method="POST">
-                      <a name="accion" value ="Salir" class="dropdown-item" href="LoginLaboratorista.jsp">Salir</a>
+                      <a name="accion" value ="Salir" class="dropdown-item" href="TipoUsuario.jsp">Salir</a>
                   </form>
               </div>
             </div>

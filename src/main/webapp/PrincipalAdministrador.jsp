@@ -64,7 +64,7 @@
               <a class="dropdown-item" href="#"><%out.println(request.getAttribute("codigoAdmin"));%></a>
               <div>
                   <form action ="ValidarAdministrador" method="POST">
-                      <a name="accion" value ="Salir" class="dropdown-item" href="LoginAdministrador.jsp">Salir</a>
+                      <a name="accion" value ="Salir" class="dropdown-item" href="TipoUsuario.jsp">Salir</a>
                   </form>
               </div>
             </div>

@@ -53,7 +53,7 @@
               <a class="dropdown-item" href="#"><%out.println(request.getAttribute("codigoDoctor"));%></a>
               <div>
                   <form action ="ValidarMedico" method="POST">
-                      <a name="accion" value ="Salir" class="dropdown-item" href="LoginMedico.jsp">Salir</a>
+                      <a name="accion" value ="Salir" class="dropdown-item" href="TipoUsuario.jsp">Salir</a>
                   </form>
               </div>
             </div>
