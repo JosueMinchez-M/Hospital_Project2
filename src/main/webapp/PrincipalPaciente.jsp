@@ -51,8 +51,16 @@
                     <a class="dropdown-item" href="PacienteCitaPendienteLaboratorio.jsp" target="framePaciente">Laboratorio</a>\-->
                   </div>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="PacienteHistorialMedico.jsp" target="framePaciente">Historial Medico</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Historial Médico
+                  </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <form action ="ControladorPacienteDB?menu=CitaRealizadaDoctor&accion=ListarHistorial" method="POST">
+                            <input type="hidden" value="<%out.println(request.getAttribute("codigoPaciente"));%>" name="txtCodigotx" class="form-control">
+                            <input type="submit" class="dropdown-item" name="accion" formtarget="framePaciente" value="Ver">
+                        </form>
+                    </div>
                 </li>
               </ul>
             </div>

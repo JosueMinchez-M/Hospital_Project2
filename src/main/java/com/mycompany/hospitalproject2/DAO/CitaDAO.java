@@ -60,4 +60,26 @@ public class CitaDAO {
         }
         return lista;
     }
+    public List listarCitaRealizadaMedico(String codigoCitaDoc){
+        String sql = "SELECT * FROM Cita WHERE Paciente_codigo= '"+codigoCitaDoc.replaceAll("\\r|\\n", "")+"' "
+                + "AND DATE(fecha_consulta) < DATE(NOW())";
+        List <Cita>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Cita cit = new Cita();
+                cit.setCodigo(rs.getString(1));
+                cit.setEspecialidad(rs.getString(2));
+                cit.setFecha(rs.getDate(3));
+                cit.setHora(rs.getString(4));
+                cit.setPaciente(rs.getString(5));
+                cit.setMedico(rs.getString(6));
+                lista.add(cit);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
 }

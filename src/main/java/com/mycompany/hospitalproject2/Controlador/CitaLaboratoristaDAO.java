@@ -43,6 +43,29 @@ public class CitaLaboratoristaDAO {
         }
         return lista;
     }
+    public List listarCitasRealizadasLab(String codigoCitaLab){
+        String sql = "SELECT * FROM CitaLaboratorista WHERE Paciente_codigo= '"+codigoCitaLab.replaceAll("\\r|\\n", "")+"' "
+                + "AND DATE(fecha_citaLab) < DATE(NOW())";
+        List <CitaLaboratorista>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            //ps.setString(1, codigoCitaLab);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                CitaLaboratorista citLab = new CitaLaboratorista();
+                citLab.setCodigo(rs.getString(1));
+                citLab.setCodigoExamen(rs.getString(2));
+                citLab.setFechaCitaLab(rs.getDate(3));
+                citLab.setHoraEstablecida(rs.getString(4));
+                citLab.setCodigoPaciente(rs.getString(5));
+                citLab.setCodigoLaboratorista(rs.getString(6));
+                lista.add(citLab);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
     
     public int agregar(CitaLaboratorista citaLab){
         String sql = "INSERT INTO CitaLaboratorista(codigo, Examen_laboratorio_codigo, fecha_citaLab, "

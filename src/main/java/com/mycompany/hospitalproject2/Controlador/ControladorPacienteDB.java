@@ -158,6 +158,18 @@ public class ControladorPacienteDB extends HttpServlet {
                     request.getRequestDispatcher("PacienteCitaPendienteMedico.jsp").forward(request, response);
                     break;
             }
+        }else if(menu.equals("CitaRealizadaDoctor")){
+            switch(accion){
+                case "ListarHistorial":
+                    String prueba = request.getParameter("txtCodigotx");
+                    //request.setAttribute("prueb", prueba.replaceAll("\\r|\\n", ""));
+                    List listaDoc = citaDAO.listarCitaRealizadaMedico(prueba);
+                    request.setAttribute("listaCitaPendiente", listaDoc);
+                    List listaLab = citaLaboratoristaDAO.listarCitasRealizadasLab(prueba);
+                    request.setAttribute("listaCitaPendienteLab", listaLab);
+                    request.getRequestDispatcher("PacienteHistorialMedico.jsp").forward(request, response);
+                    break;
+            }
         }
     }
     public int generarNumero(){
