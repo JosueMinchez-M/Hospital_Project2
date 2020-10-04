@@ -11,6 +11,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <title>JSP Page</title>
+        <style>
+            iframe{
+            border:none;
+            }
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -23,8 +28,16 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="#">Doctor<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="DoctorInforme.jsp" target="frameDoctor">Informe</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Informe
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <form action ="ControladorMedicoDB?menu=InformeMedico&accion=MandarCodigo" method="POST">
+                      <input type="hidden" value="<%out.println(request.getAttribute("codigoDoctor"));%>" name="txtCodigotx" class="form-control">
+                      <input type="submit" class="dropdown-item" name="accion" formtarget="frameDoctor" value="Redactar">
+                      </form>
+                  </div>
                 </li>
               </ul>
             </div>
