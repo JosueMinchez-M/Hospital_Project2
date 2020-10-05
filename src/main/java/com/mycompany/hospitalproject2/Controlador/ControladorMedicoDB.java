@@ -5,6 +5,7 @@
  */
 package com.mycompany.hospitalproject2.Controlador;
 
+import com.mycompany.hospitalproject2.DAO.ReporteDAO;
 import com.mycompany.hospitalproject2.Cita;
 import com.mycompany.hospitalproject2.DAO.CitaDAO;
 import com.mycompany.hospitalproject2.Reporte;

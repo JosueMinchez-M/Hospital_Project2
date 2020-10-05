@@ -1,4 +1,4 @@
-package com.mycompany.hospitalproject2.Controlador;
+package com.mycompany.hospitalproject2.DAO;
 
 import com.mycompany.hospitalproject2.Reporte;
 import com.mycompany.hospitalproject2.conexion.Conexion;
