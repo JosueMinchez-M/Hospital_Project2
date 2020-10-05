@@ -1,6 +1,5 @@
 package com.mycompany.hospitalproject2.Controlador;
 
-import com.mycompany.hospitalproject2.Cita;
 import com.mycompany.hospitalproject2.Reporte;
 import com.mycompany.hospitalproject2.conexion.Conexion;
 import java.sql.Connection;

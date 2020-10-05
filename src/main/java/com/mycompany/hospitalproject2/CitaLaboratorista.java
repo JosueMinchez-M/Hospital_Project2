@@ -13,17 +13,20 @@ public class CitaLaboratorista {
     private String horaEstablecida;
     private String codigoPaciente;
     private String codigoLaboratorista;
+    private String codigoMedico; 
 
     public CitaLaboratorista(){
         
     }
-    public CitaLaboratorista(String codigo, String codigoExamen, Date fechaCitaLab, String horaEstablecida, String codigoPaciente, String codigoLaboratorista) {
+    public CitaLaboratorista(String codigo, String codigoExamen, Date fechaCitaLab, String horaEstablecida, String codigoPaciente, String codigoLaboratorista, String codigoMedico) {
         this.codigo = codigo;
         this.codigoExamen = codigoExamen;
         this.fechaCitaLab = fechaCitaLab;
         this.horaEstablecida = horaEstablecida;
         this.codigoPaciente = codigoPaciente;
         this.codigoLaboratorista = codigoLaboratorista;
+        this.codigoMedico = codigoMedico;
+        
     }
 
     public String getCodigo() {
@@ -72,6 +75,14 @@ public class CitaLaboratorista {
 
     public void setCodigoLaboratorista(String codigoLaboratorista) {
         this.codigoLaboratorista = codigoLaboratorista;
+    }
+
+    public String getCodigoMedico() {
+        return codigoMedico;
+    }
+
+    public void setCodigoMedico(String codigoMedico) {
+        this.codigoMedico = codigoMedico;
     }
     
     

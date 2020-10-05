@@ -9,7 +9,6 @@ import com.mycompany.hospitalproject2.Cita;
 import com.mycompany.hospitalproject2.DAO.CitaDAO;
 import com.mycompany.hospitalproject2.Reporte;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.List;
 import javax.servlet.ServletException;

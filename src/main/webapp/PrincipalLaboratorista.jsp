@@ -34,11 +34,13 @@
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Llenar Campo
+                    Resultado
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#" target="frameLaboratorista">Llenar aqui</a>
-                    <a class="dropdown-item" href="#" target="frameLaboratorista">Llenar aqui</a>
+                      <form action ="ControladorLaboratoristaDB?menu=ResultadoLab&accion=ListarCitasLaboratorio" method="POST">
+                      <input type="hidden" value="<%out.println(request.getAttribute("codigoLaboratorista"));%>" name="txtCodigotx" class="form-control">
+                      <input type="submit" class="dropdown-item" name="accion" formtarget="frameLaboratorista" value="Nuevo Resultado">
+                      </form>
                   </div>
                 </li>
                 <li class="nav-item">

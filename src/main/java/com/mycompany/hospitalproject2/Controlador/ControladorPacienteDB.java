@@ -132,8 +132,9 @@ public class ControladorPacienteDB extends HttpServlet {
                     String horaCita = request.getParameter("txtHoraCita");
                     String codigoPaciente = request.getParameter("txtCodigoPacienteCita");
                     String codigoLab = request.getParameter("txtCodigoLaboratoristaCita");
+                    String codDoct = request.getParameter("txtCodigoDoctorCita");
                     String codigo = String.valueOf(generarNumero());
-                    CitaLaboratorista citaLab = new CitaLaboratorista(codigo, codExamen, Date.valueOf(fechaCita), horaCita, codigoPaciente, codigoLab);
+                    CitaLaboratorista citaLab = new CitaLaboratorista(codigo, codExamen, Date.valueOf(fechaCita), horaCita, codigoPaciente, codigoLab, codDoct);
                     citaLaboratoristaDAO.agregar(citaLab);
                     request.getRequestDispatcher("ControladorPacienteDB?menu=AgendarCitaExamenLab&accion=Listar").forward(request, response);
                     break;

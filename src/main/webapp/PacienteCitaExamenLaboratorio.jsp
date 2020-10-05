@@ -131,10 +131,10 @@
                             <input type="text" name="txtCodigoLaboratoristaCita" class="form-control" placeholder="Codigo Laboratorista">
                           </div>
                           <div class="col">
-                              <input type="submit" class="btn btn-primary" name="accion" value="Registrar">
+                              <input type="text" name="txtCodigoDoctorCita" class="form-control" placeholder="Codigo Doctor (Opcional)">
                           </div>
                           <div class="col">
-                            <input type="hidden" class="btn btn-success" name="accion" value="Actualizar" formaction="Prueba?menu=AgregarDoctor&accion=Actualizar">
+                            <input type="submit" class="btn btn-primary" name="accion" value="Registrar">
                           </div>
                           <div class="col">
                               <input type="hidden" name="txtCodigoDoctorCita" class="form-control" placeholder="Codigo Doctor">
