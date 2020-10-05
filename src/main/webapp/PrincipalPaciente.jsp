@@ -68,7 +68,7 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                       <form action ="ControladorPacienteDB?menu=Consulta1&accion=Listar" method="POST">
-                      <input type="text" value="<%out.println(request.getAttribute("codigoPaciente"));%>" name="txtCodigotx" class="form-control">
+                      <input type="hidden" value="<%out.println(request.getAttribute("codigoPaciente"));%>" name="txtCodigotx" class="form-control">
                       <input type="submit" class="dropdown-item" name="accion" formtarget="framePaciente" value="Ver">
                       </form>
                     <!--<a class="dropdown-item" href="PacienteCitaPendienteMedico.jsp" target="framePaciente">Médico</a>
