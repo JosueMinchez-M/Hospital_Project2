@@ -142,4 +142,27 @@ public class CitaDAO {
         }
         return lista;
     }
+    public List listarConsulta4(String codigoPaciente, String codMedico, String fechaMenor, String fechaMayor){
+        String sql = "SELECT * FROM Cita WHERE Paciente_codigo= '"+codigoPaciente.replaceAll("\\r|\\n", "")+"' "
+                + "AND Medico_codigo = '"+codMedico+"' AND fecha_consulta BETWEEN '"+fechaMenor+"' AND '"+fechaMayor+"' AND "
+                + "DATE(fecha_consulta) < DATE(NOW()) ORDER BY fecha_consulta DESC";
+        List <Cita>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Cita cit = new Cita();
+                cit.setCodigo(rs.getString(1));
+                cit.setEspecialidad(rs.getString(2));
+                cit.setFecha(rs.getDate(3));
+                cit.setHora(rs.getString(4));
+                cit.setPaciente(rs.getString(5));
+                cit.setMedico(rs.getString(6));
+                lista.add(cit);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
 }

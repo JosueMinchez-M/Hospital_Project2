@@ -5,6 +5,7 @@
  */
 package com.mycompany.hospitalproject2.Controlador;
 
+import com.mycompany.hospitalproject2.DAO.CitaLaboratoristaDAO;
 import com.mycompany.hospitalproject2.Cita;
 import com.mycompany.hospitalproject2.CitaLaboratorista;
 import com.mycompany.hospitalproject2.DAO.CitaDAO;
@@ -169,6 +170,54 @@ public class ControladorPacienteDB extends HttpServlet {
                     List listaLab = citaLaboratoristaDAO.listarCitasRealizadasLab(prueba);
                     request.setAttribute("listaCitaPendienteLab", listaLab);
                     request.getRequestDispatcher("PacienteHistorialMedico.jsp").forward(request, response);
+                    break;
+            }
+        }else if(menu.equals("Consulta1")){
+            switch(accion){
+                case "Listar":
+                    String codPaciente = request.getParameter("txtCodigotx");
+                    request.setAttribute("codPaci", codPaciente);
+                    List listaC1 = citaLaboratoristaDAO.listarConsulta1(codPaciente);
+                    request.setAttribute("listac1", listaC1);
+                    List listaConsultaCompleta = citaLaboratoristaDAO.listarCitasRealizadasLab(codPaciente);
+                    request.setAttribute("listac2", listaConsultaCompleta);
+                    List listaConsultaMedico1 = citaDAO.listarCitaRealizadaMedico(codPaciente);
+                    request.setAttribute("listac3", listaConsultaMedico1);
+                    List listaConsultaMedico4 = citaDAO.listarCitaRealizadaMedico(codPaciente);
+                    request.setAttribute("listac4", listaConsultaMedico4);
+                    request.getRequestDispatcher("PacienteConsulta.jsp").forward(request, response);
+                    break;
+                case "Listar2":
+                    String codPac = request.getParameter("txtCodigoPaci");
+                    request.setAttribute("codPaci", codPac);
+                    String codTipo = request.getParameter("txtBuscarCodigoTipo");
+                    String fechaMen = request.getParameter("txtBuscarFechaMenor");
+                    String fechaMay = request.getParameter("txtBuscarFechaMayor");
+                    List listaC12 = citaLaboratoristaDAO.listarConsulta1(codPac);
+                    request.setAttribute("listac1", listaC12);
+                    List listaC2 = citaLaboratoristaDAO.listarConsulta2(codPac, codTipo, fechaMen, fechaMay);
+                    request.setAttribute("listac2", listaC2);
+                    List listaConsultaMedic1 = citaDAO.listarCitaRealizadaMedico(codPac);
+                    request.setAttribute("listac3", listaConsultaMedic1);
+                    List listaConsultaMedi4 = citaDAO.listarCitaRealizadaMedico(codPac);
+                    request.setAttribute("listac4", listaConsultaMedi4);
+                    request.getRequestDispatcher("PacienteConsulta.jsp").forward(request, response);
+                    break;
+                case "Listar3":
+                    String codPacient = request.getParameter("txtCodigoPaci");
+                    request.setAttribute("codPaci", codPacient);
+                    String codTipo3 = request.getParameter("txtBuscarDoc");
+                    String fechaMen3 = request.getParameter("txtBuscarFechaMenor");
+                    String fechaMay3 = request.getParameter("txtBuscarFechaMayor");
+                    List listaConsulta4 = citaDAO.listarConsulta4(codPacient, codTipo3, fechaMen3, fechaMay3);
+                    request.setAttribute("listac4", listaConsulta4);
+                    List listaC11 = citaLaboratoristaDAO.listarConsulta1(codPacient);
+                    request.setAttribute("listac1", listaC11);
+                    List listaConsultaComplet = citaLaboratoristaDAO.listarCitasRealizadasLab(codPacient);
+                    request.setAttribute("listac2", listaConsultaComplet);
+                    List listaConsultaMedi1 = citaDAO.listarCitaRealizadaMedico(codPacient);
+                    request.setAttribute("listac3", listaConsultaMedi1);
+                    request.getRequestDispatcher("PacienteConsulta.jsp").forward(request, response);
                     break;
             }
         }

@@ -62,6 +62,19 @@
                         </form>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Consultas
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <form action ="ControladorPacienteDB?menu=Consulta1&accion=Listar" method="POST">
+                      <input type="text" value="<%out.println(request.getAttribute("codigoPaciente"));%>" name="txtCodigotx" class="form-control">
+                      <input type="submit" class="dropdown-item" name="accion" formtarget="framePaciente" value="Ver">
+                      </form>
+                    <!--<a class="dropdown-item" href="PacienteCitaPendienteMedico.jsp" target="framePaciente">Médico</a>
+                    <a class="dropdown-item" href="PacienteCitaPendienteLaboratorio.jsp" target="framePaciente">Laboratorio</a>\-->
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="dropdown">

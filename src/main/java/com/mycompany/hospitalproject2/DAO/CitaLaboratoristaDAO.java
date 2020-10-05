@@ -1,4 +1,4 @@
-package com.mycompany.hospitalproject2.Controlador;
+package com.mycompany.hospitalproject2.DAO;
 
 import com.mycompany.hospitalproject2.CitaLaboratorista;
 import com.mycompany.hospitalproject2.conexion.Conexion;
@@ -151,5 +151,54 @@ public class CitaLaboratoristaDAO {
         } catch (Exception e) {
         }
         return citLab;
+    }
+    
+    public List listarConsulta1(String codigoCitaLab){
+        String sql = "SELECT * FROM CitaLaboratorista WHERE Paciente_codigo= '"+codigoCitaLab.replaceAll("\\r|\\n", "")+"' "
+                + "AND DATE(fecha_citaLab) < DATE(NOW()) ORDER BY fecha_citaLab DESC LIMIT 5";
+        List <CitaLaboratorista>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            //ps.setString(1, codigoCitaLab);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                CitaLaboratorista citLab = new CitaLaboratorista();
+                citLab.setCodigo(rs.getString(1));
+                citLab.setCodigoExamen(rs.getString(2));
+                citLab.setFechaCitaLab(rs.getDate(3));
+                citLab.setHoraEstablecida(rs.getString(4));
+                citLab.setCodigoPaciente(rs.getString(5));
+                citLab.setCodigoLaboratorista(rs.getString(6));
+                citLab.setCodigoMedico(rs.getString(7));
+                lista.add(citLab);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    public List listarConsulta2(String codigoCitaLab, String codExamen, String fechaMenor, String fechaMayor){
+        String sql = "SELECT * FROM CitaLaboratorista WHERE Paciente_codigo= '"+codigoCitaLab.replaceAll("\\r|\\n", "")+"' "
+                + "AND Examen_laboratorio_codigo = '"+codExamen+"' AND fecha_citaLab BETWEEN '"+fechaMenor+"' AND '"+fechaMayor+"' "
+                + "AND DATE(fecha_citaLab) < DATE(NOW()) ORDER BY fecha_citaLab DESC";
+        List <CitaLaboratorista>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                CitaLaboratorista citLab = new CitaLaboratorista();
+                citLab.setCodigo(rs.getString(1));
+                citLab.setCodigoExamen(rs.getString(2));
+                citLab.setFechaCitaLab(rs.getDate(3));
+                citLab.setHoraEstablecida(rs.getString(4));
+                citLab.setCodigoPaciente(rs.getString(5));
+                citLab.setCodigoLaboratorista(rs.getString(6));
+                citLab.setCodigoMedico(rs.getString(7));
+                lista.add(citLab);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
     }
 }
