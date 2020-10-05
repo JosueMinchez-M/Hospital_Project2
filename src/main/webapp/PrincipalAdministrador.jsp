@@ -45,6 +45,7 @@
                     <a class="dropdown-item" href="Prueba?menu=AgregarDoctor&accion=Listar" target="frameAdministrador">Doctor</a>
                     <a class="dropdown-item" href="Prueba?menu=AgregarEspecialidad&accion=Listar" target="frameAdministrador">Especialidad Doctor</a>
                     <a class="dropdown-item" href="Prueba?menu=AgregarLaboratorista&accion=Listar" target="frameAdministrador">Laboratorista</a>
+                    <a class="dropdown-item" href="Prueba?menu=AgregarPaciente&accion=Listar" target="frameAdministrador">Paciente</a>
                   </div>
                 </li>
                 <li class="nav-item">

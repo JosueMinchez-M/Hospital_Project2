@@ -11,10 +11,12 @@ import com.mycompany.hospitalproject2.DAO.DoctorDAO;
 import com.mycompany.hospitalproject2.DAO.EspecialidadMedicoDAO;
 import com.mycompany.hospitalproject2.DAO.ExamenDAO;
 import com.mycompany.hospitalproject2.DAO.LaboratoristaDAO;
+import com.mycompany.hospitalproject2.DAO.PacienteDAO;
 import com.mycompany.hospitalproject2.Doctor;
 import com.mycompany.hospitalproject2.EspecialidadMedico;
 import com.mycompany.hospitalproject2.Examen;
 import com.mycompany.hospitalproject2.Laboratorista;
+import com.mycompany.hospitalproject2.Paciente;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
@@ -38,6 +40,7 @@ public class ControladorDB extends HttpServlet {
     EspecialidadMedicoDAO especialidadMedicoDAO = new EspecialidadMedicoDAO();
     ConsultaDAO consultaDAO = new ConsultaDAO();
     ExamenDAO examenDAO = new ExamenDAO();
+    PacienteDAO pacienteDAO = new PacienteDAO();
     String id;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -143,6 +146,50 @@ public class ControladorDB extends HttpServlet {
                     request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
                     break;
             }
+        }else if(menu.equals("AgregarPaciente")){
+            switch(accion){
+                case "Listar":
+                    List lista = pacienteDAO.listar();
+                    request.setAttribute("listaPaciente", lista);
+                    request.getRequestDispatcher("AdminAgregarPaciente.jsp").forward(request, response);
+                    break;
+                case "Agregar":
+                    String codigo = String.valueOf(generarNumero());
+                    String nombre = request.getParameter("txtNombrePac");
+                    String genero = request.getParameter("txtGeneroPac");
+                    String fechaNac = request.getParameter("txtFechaNacPac");
+                    String dpi = request.getParameter("txtDpiPac");
+                    String tel = request.getParameter("txtTelPac");
+                    String peso = request.getParameter("txtPesoPac");
+                    String tipoSangre = request.getParameter("txtTipoSanPac");
+                    String correo = request.getParameter("txtCorreoPac");
+                    String pass = request.getParameter("txtPassPac");
+                    Paciente pacient = new Paciente(codigo, nombre, dpi, pass, genero, Date.valueOf(fechaNac),tel, Double.parseDouble(peso), tipoSangre, correo);
+                    pacienteDAO.agregar(pacient);
+                    request.getRequestDispatcher("Prueba?menu=AgregarPaciente&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    id = request.getParameter("id");
+                    Paciente pac = pacienteDAO.listarId(id);
+                    request.setAttribute("editarPaciente", pac);
+                    request.getRequestDispatcher("Prueba?menu=AgregarPaciente&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String codigoA = request.getParameter("txtCodigoPac");
+                    String nombreA = request.getParameter("txtNombrePac");
+                    String generoA = request.getParameter("txtGeneroPac");
+                    String fechaNacA = request.getParameter("txtFechaNacPac");
+                    String dpiA = request.getParameter("txtDpiPac");
+                    String telA = request.getParameter("txtTelPac");
+                    String pesoA = request.getParameter("txtPesoPac");
+                    String tipoSangreA = request.getParameter("txtTipoSanPac");
+                    String correoA = request.getParameter("txtCorreoPac");
+                    String passA = request.getParameter("txtPassPac");
+                    Paciente pacientA = new Paciente(codigoA, nombreA, dpiA, passA, generoA, Date.valueOf(fechaNacA),telA, Double.parseDouble(pesoA), tipoSangreA, correoA);
+                    pacienteDAO.actualizar(pacientA);
+                    request.getRequestDispatcher("Prueba?menu=AgregarPaciente&accion=Listar").forward(request, response);
+                    break;
+            }
         }else if(menu.equals("AgregarEspecialidad")){
             switch(accion){
                 case "Listar":
@@ -229,6 +276,9 @@ public class ControladorDB extends HttpServlet {
                     break;
             }
         }
+    }
+    public int generarNumero(){
+        return (int)(1000000 * Math.random());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
