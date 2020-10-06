@@ -48,9 +48,6 @@
                     <a class="dropdown-item" href="Prueba?menu=AgregarPaciente&accion=Listar" target="frameAdministrador">Paciente</a>
                   </div>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="AdminImportarDatos.jsp" target="frameAdministrador">Importar Datos BD</a>
-                </li>
               </ul>
             </div>
             <div class="dropdown">

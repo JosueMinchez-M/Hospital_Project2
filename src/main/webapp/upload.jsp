@@ -12,6 +12,19 @@
         <title>Importar Archivo</title>
     </head>
     <body>
+        </div>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
         <center>
             <h1>Importar Archivo</h1>
             <form action="UploadServlet" method="post" enctype="multipart/form-data">

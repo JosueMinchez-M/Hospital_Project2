@@ -1,6 +1,5 @@
 package com.mycompany.hospitalproject2.DAO;
 
-import com.mycompany.hospitalproject2.Doctor;
 import com.mycompany.hospitalproject2.Paciente;
 import com.mycompany.hospitalproject2.conexion.Conexion;
 import java.sql.Connection;
@@ -138,5 +137,20 @@ public class PacienteDAO {
         } catch (Exception e) {
         }
         return respuesta;
+    }
+    
+    public int cantidadPacientes(){
+        int cantidad = 0;
+        String sql = "SELECT COUNT(*) FROM Paciente";
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                cantidad = Integer.parseInt(rs.getString(1));
+            }
+        } catch (Exception e) {
+        }
+        return cantidad;
     }
 }

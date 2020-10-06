@@ -14,14 +14,21 @@
     </head>
     <body>
         <div class="alert alert-success text-center" role="alert">
-            El archivo a sido importado
+            El archivo a sido Importado Correctamente
         </div>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
         <center>
-            <h1>Importar Archivo</h1>
-            <form action="UploadServlet" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" />
-                <input type="submit"/>
-            </form>
+            <a type="submit" name="btn_ImportarDatos" class="btn btn-success btn_blog" href="TipoUsuario.jsp">Regresar al Inico</a>
         </center>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

@@ -16,6 +16,12 @@
         <div class="alert alert-danger text-center" role="alert">
             ¡Upss a ocurrido un error! No se importo el archivo
         </div>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
         <center>
             <h1>Importar Archivo</h1>
             <form action="UploadServlet" method="post" enctype="multipart/form-data">
@@ -23,5 +29,8 @@
                 <input type="submit"/>
             </form>
         </center>
+        <div class="container mt-4 col-lg-4">
+            <a type="submit" name="btn_ImportarDatos" class="btn btn-success btn_blog" href="TipoUsuario.jsp">Regresar al Inicio</a>
+        </div>
     </body>
 </html>
