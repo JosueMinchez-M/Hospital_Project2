@@ -57,7 +57,7 @@ public class ImportarXML {
     Consulta consulta;
     String inicio_trabajo = "";
     
-    public void analizarXML(){
+    public void analizarXML(String Path){
         try {
             for (int z = 0; z < nombreTag.length; z++) {
                 capturarDatos.clear();
@@ -65,8 +65,8 @@ public class ImportarXML {
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 // Creo un documentBuilder
                 DocumentBuilder builder = factory.newDocumentBuilder();
-                // Obtengo el documento, a partir del XML
-                Document documento = builder.parse(new File("/home/joshua/Escritorio/datosHospital.xml"));
+                // Obtengo el documento, a partir del XML /home/joshua/Escritorio/datosHospital.xml
+                Document documento = builder.parse(new File(Path));
                 // Cojo todas las etiquetas coche del documento
                 NodeList lista = documento.getElementsByTagName(nombreTag[z]);
                 if(nombreTag[z].equals("admin")){
