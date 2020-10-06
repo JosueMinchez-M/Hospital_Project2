@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -78,7 +79,7 @@ public class ValidarPaciente extends HttpServlet {
         String botonRegistrarPaciente = request.getParameter("btn_registrarPaciente");
         if(botonRegistrarPaciente.equalsIgnoreCase("Registrar")){
             String user = request.getParameter("txt_userPaciente");
-            String pass = request.getParameter("txt_passwordPaciente");
+            String pass = DigestUtils.md5Hex(request.getParameter("txt_passwordPaciente"));
             paciente = pacienteDAO.validar(user, pass);
             if(paciente.getCodigo() != null){
                 //String hola = "Hola Mundo";

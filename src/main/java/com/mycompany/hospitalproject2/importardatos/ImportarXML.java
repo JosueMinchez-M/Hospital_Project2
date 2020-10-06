@@ -28,6 +28,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -127,10 +128,10 @@ public class ImportarXML {
                 System.out.println(capturarDatos.size());
                 //System.out.println(capturarDatos.get(0));
                 if(nombreTag.equals("admin")){
-                    administrador = new Administrador(capturarDatos.get(0), capturarDatos.get(2), capturarDatos.get(1), capturarDatos.get(3));
+                    administrador = new Administrador(capturarDatos.get(0), capturarDatos.get(2), capturarDatos.get(1), DigestUtils.md5Hex(capturarDatos.get(3)));
                     insertarAdministrador();
                 }else if(nombreTag.equals("paciente")){
-                    paciente = new Paciente(capturarDatos.get(0), capturarDatos.get(1), capturarDatos.get(4), capturarDatos.get(9),
+                    paciente = new Paciente(capturarDatos.get(0), capturarDatos.get(1), capturarDatos.get(4), DigestUtils.md5Hex(capturarDatos.get(9)),
                             capturarDatos.get(2), Date.valueOf(capturarDatos.get(3)), capturarDatos.get(5), Double.parseDouble(capturarDatos.get(6)), 
                             capturarDatos.get(7), capturarDatos.get(8));
                     insertarPaciente();
@@ -221,7 +222,7 @@ public class ImportarXML {
                 System.out.println(capturarDatos.size());
                 if(nombreTag.equals("doctor")){
                     doctor = new Doctor(capturarDatos.get(0), capturarDatos.get(1), capturarDatos.get(3), 
-                    capturarDatos.get(8), capturarDatos.get(2), capturarDatos.get(4),capturarDatos.get(5),
+                    DigestUtils.md5Hex(capturarDatos.get(8)), capturarDatos.get(2), capturarDatos.get(4),capturarDatos.get(5),
                     capturarDatos.get(6), capturarDatos.get(7), Date.valueOf(inicio_trabajo));
                     insertarMedico();
                     for (int j = 0; j < especialidadDoctor.size(); j++) {
@@ -230,7 +231,7 @@ public class ImportarXML {
                     }
                     especialidadDoctor.clear();
                 }else if(nombreTag.equals("laboratorista")){
-                    laboratorista = new Laboratorista(capturarDatos.get(0), capturarDatos.get(1), capturarDatos.get(3), capturarDatos.get(7)
+                    laboratorista = new Laboratorista(capturarDatos.get(0), capturarDatos.get(1), capturarDatos.get(3), DigestUtils.md5Hex(capturarDatos.get(7))
                     ,capturarDatos.get(2), capturarDatos.get(5), capturarDatos.get(5), capturarDatos.get(6),
                     Date.valueOf(inicio_trabajo));
                     insertarLaboratorista();

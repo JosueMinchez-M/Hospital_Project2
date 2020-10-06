@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -78,7 +79,7 @@ public class ValidarAdministrador extends HttpServlet {
         String botonRegistrarPaciente = request.getParameter("btn_registrarAdmin");
         if(botonRegistrarPaciente.equalsIgnoreCase("Registrar")){
             String user = request.getParameter("txt_userAdmin");
-            String pass = request.getParameter("txt_passwordAdmin");
+            String pass = DigestUtils.md5Hex(request.getParameter("txt_passwordAdmin"));
             administrador = administradorDAO.validar(user, pass);
             if(administrador.getCodigo() != null){
                 request.setAttribute("nombreAdmin", administrador.getNombre());

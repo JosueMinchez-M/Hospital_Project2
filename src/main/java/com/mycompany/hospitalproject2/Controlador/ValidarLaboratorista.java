@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -78,7 +79,7 @@ public class ValidarLaboratorista extends HttpServlet {
         String botonRegistrarLaboratorista = request.getParameter("btn_registrarLaboratorista");
         if(botonRegistrarLaboratorista.equalsIgnoreCase("Registrar")){
             String user = request.getParameter("txt_userLaboratorista");
-            String pass = request.getParameter("txt_passwordLaboratorista");
+            String pass = DigestUtils.md5Hex(request.getParameter("txt_passwordLaboratorista"));
             laboratorista = laboratoristaDAO.validar(user, pass);
             if(laboratorista.getCodigo() != null){
                 request.setAttribute("nombreLaboratorista", laboratorista.getNombre());
