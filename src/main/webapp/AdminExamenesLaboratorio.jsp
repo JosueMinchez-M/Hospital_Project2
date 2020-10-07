@@ -24,18 +24,48 @@
             }
             form { 
                 margin: 0 auto; 
-                width:1000px; 
+                width:1100px; 
             } 
         </style>
     </head>
     <body>
+        <c:if test="${numAgregado eq 1}">
+            <div class="alert alert-success text-center" role="alert">
+                Examen Registrado Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numAgregado eq 2}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Registro el Examen
+            </div>
+        </c:if>
+        <c:if test="${numActuConsulta eq 3}">
+            <div class="alert alert-success text-center" role="alert">
+                Examen Actualizado Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numActuConsulta eq 4}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Actualizo la Consulta
+            </div>
+        </c:if>
+        <c:if test="${numVacioConsulta eq 5}">
+            <div class="alert alert-warning text-center" role="alert">
+                ¡Upss! Algun campo se Encuentra Vacío
+            </div>
+        </c:if>
+        <c:if test="${numActualizarConsultVacia eq 6}">
+            <div class="alert alert-warning text-center" role="alert">
+                ¡Upss! Algun campo se Encuentra Vacío
+            </div>
+        </c:if>
             <div>
                 <h2 class="text-center">Agregar/Modificar Examenes para Laboratorio</h2>
                 <div>
                     <form action="Prueba?menu=AgregarExamenLab&accion=Agregar" method="POST">
                         <div class="row">
                           <div class="col">
-                            <input type="text" value="${editarExamen.getCodigo()}" name="txtCodigoEx" class="form-control" placeholder="Código">
+                              <input type="text" value="${editarExamen.getCodigo()}" name="txtCodigoEx" class="form-control" placeholder="Código Generado Automático" readonly>
                           </div>
                           <div class="col">
                             <input type="text" value="${editarExamen.getNombre()}" name="txtNombreEx" class="form-control" placeholder="Nombre">

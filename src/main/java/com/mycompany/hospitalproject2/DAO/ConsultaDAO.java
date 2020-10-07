@@ -44,7 +44,9 @@ public class ConsultaDAO {
             ps.setString(1, con.getTipo());
             ps.setInt(2, con.getCosto());          
             ps.executeUpdate();
+            respuesta = 1;
         } catch (Exception e) {
+            respuesta = 2;
         }
         return respuesta;
     }
@@ -72,8 +74,24 @@ public class ConsultaDAO {
             ps.setInt(1, con.getCosto());
             ps.setString(2, con.getTipo());
             ps.executeUpdate();
+            respuesta = 3;
         } catch (Exception e) {
+            respuesta = 4;
         }
         return respuesta;
+    }
+    public int cantidadConsultas(){
+        int cantidad = 0;
+        String sql = "SELECT COUNT(*) FROM Consulta";
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                cantidad = Integer.parseInt(rs.getString(1));
+            }
+        } catch (Exception e) {
+        }
+        return cantidad;
     }
 }

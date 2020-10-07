@@ -85,7 +85,9 @@ public class LaboratoristaDAO {
             ps.setDate(8, lab.getFecha_trabajar());
             ps.setString(9, lab.getPassword());           
             ps.executeUpdate();
+            respuesta = 1;
         } catch (Exception e) {
+            respuesta = 2;
         }
         return respuesta;
     }
@@ -128,7 +130,30 @@ public class LaboratoristaDAO {
             ps.setString(8, lab.getPassword()); 
             ps.setString(9, lab.getCodigo());
             ps.executeUpdate();
+            respuesta = 3;
         } catch (Exception e) {
+            respuesta = 4;
+        }
+        return respuesta;
+    }
+    public int actualizarSinPass(Laboratorista lab){
+        String sql = "UPDATE Laboratorista SET nombre=?, numero_registro_MS=?, dpi=?, telefono=?, examen_realiza=?, "
+                + "correo_electronico=?, fecha_inicio_a_trabajar=? WHERE codigo=?";
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            ps.setString(1, lab.getNombre());
+            ps.setString(2, lab.getNumero_registro());
+            ps.setString(3, lab.getDpi());
+            ps.setString(4, lab.getTelefono());
+            ps.setString(5, lab.getExamen_realizar());
+            ps.setString(6, lab.getCorreo());
+            ps.setDate(7, lab.getFecha_trabajar());
+            ps.setString(8, lab.getCodigo());
+            ps.executeUpdate();
+            respuesta = 3;
+        } catch (Exception e) {
+            respuesta = 4;
         }
         return respuesta;
     }

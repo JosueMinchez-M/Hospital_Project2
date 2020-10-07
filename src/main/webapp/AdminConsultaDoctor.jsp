@@ -29,6 +29,36 @@
         </style>
     </head>
     <body>
+        <c:if test="${numAgregado eq 1}">
+            <div class="alert alert-success text-center" role="alert">
+                Consulta Registrada Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numAgregado eq 2}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Registro la Consulta
+            </div>
+        </c:if>
+        <c:if test="${numActuConsulta eq 3}">
+            <div class="alert alert-success text-center" role="alert">
+                Consulta Actualizada Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numActuConsulta eq 4}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Actualizo la Consulta
+            </div>
+        </c:if>
+        <c:if test="${numVacioConsulta eq 5}">
+            <div class="alert alert-warning text-center" role="alert">
+                ¡Upss! Algun campo se Encuentra Vacío
+            </div>
+        </c:if>
+        <c:if test="${numActualizarConsultVacia eq 6}">
+            <div class="alert alert-warning text-center" role="alert">
+                ¡Upss! Algun campo se Encuentra Vacío
+            </div>
+        </c:if>
             <div>
                 <h2 class="text-center">Agregar/Modificar Consulta Doctor</h2>
                 </br>

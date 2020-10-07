@@ -20,11 +20,14 @@ import com.mycompany.hospitalproject2.Paciente;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -64,7 +67,9 @@ public class ControladorDB extends HttpServlet {
                     request.getRequestDispatcher("AdminAgregarMedico.jsp").forward(request, response);
                     break;
                 case "Agregar":
-                    String codigo = request.getParameter("txtCodigoDoc");
+                    Random rng = new Random();
+                    int dig3 = rng.nextInt(900)+100;
+                    String codigo = String.valueOf("MED-"+dig3);
                     String nombre = request.getParameter("txtNombreDoc");
                     String colegiado = request.getParameter("txtColegiadoDoc");
                     String dpi = request.getParameter("txtDpiDoc");
@@ -73,11 +78,22 @@ public class ControladorDB extends HttpServlet {
                     String horEntrada = request.getParameter("txtHIDoc");
                     String horSalida = request.getParameter("txtHSDoc");
                     String fechaInicio = request.getParameter("txtITDoc");
-                    String pass = request.getParameter("txtPassDoc");
+                    String pass = DigestUtils.md5Hex(request.getParameter("txtPassDoc"));
                     String especialidad = request.getParameter("");
-                    docConst = new Doctor(colegiado, tel, especialidad, correo, horEntrada, horSalida, Date.valueOf(fechaInicio), codigo, nombre, dpi, pass);
-                    doctorDAO.agregar(docConst);
-                    request.getRequestDispatcher("Prueba?menu=AgregarDoctor&accion=Listar").forward(request, response);
+                    if(codigo.replaceAll("\\r|\\n", "").equals("")||nombre.replaceAll("\\r|\\n", "").equals("")
+                            || colegiado.replaceAll("\\r|\\n", "").equals("")|| dpi.replaceAll("\\r|\\n", "").equals("")
+                            || tel.replaceAll("\\r|\\n", "").equals("") || correo.replaceAll("\\r|\\n", "").equals("")
+                            || horEntrada.replaceAll("\\r|\\n", "").equals("")|| horSalida.replaceAll("\\r|\\n", "").equals("")
+                            || fechaInicio.replaceAll("\\r|\\n", "").equals("")|| pass.replaceAll("\\r|\\n", "").equals("")){
+                        int numAgregarVacio = 5;
+                        request.setAttribute("numVacioConsulta", numAgregarVacio);
+                        request.getRequestDispatcher("Prueba?menu=AgregarDoctor&accion=Listar").forward(request, response);
+                    }else{
+                        docConst = new Doctor(colegiado, tel, especialidad, correo, horEntrada, horSalida, Date.valueOf(fechaInicio), codigo, nombre, dpi, pass);
+                        int numAgregar = doctorDAO.agregar(docConst);
+                        request.setAttribute("numAgregado", numAgregar);
+                        request.getRequestDispatcher("Prueba?menu=AgregarDoctor&accion=Listar").forward(request, response);
+                    }
                     break;
                     case "Editar":
                     id = request.getParameter("id");
@@ -97,9 +113,28 @@ public class ControladorDB extends HttpServlet {
                     String fechaInicioA = request.getParameter("txtITDoc");
                     String passA = request.getParameter("txtPassDoc");
                     String especialidadA = request.getParameter("");
-                    docConst = new Doctor(colegiadoA, telA, especialidadA, correoA, horEntradaA, horSalidaA, Date.valueOf(fechaInicioA), codigoA, nombreA, dpiA, passA);
-                    doctorDAO.actualizar(docConst);
-                    request.getRequestDispatcher("Prueba?menu=AgregarDoctor&accion=Listar").forward(request, response);
+                    if(codigoA.replaceAll("\\r|\\n", "").equals("")||nombreA.replaceAll("\\r|\\n", "").equals("")||
+                            colegiadoA.replaceAll("\\r|\\n", "").equals("")||dpiA.replaceAll("\\r|\\n", "").equals("")||
+                            telA.replaceAll("\\r|\\n", "").equals("")||correoA.replaceAll("\\r|\\n", "").equals("")||
+                            horEntradaA.replaceAll("\\r|\\n", "").equals("")|| horSalidaA.replaceAll("\\r|\\n", "").equals("")||
+                            fechaInicioA.replaceAll("\\r|\\n", "").equals("")){
+                        int numActualizarVacio = 6;
+                        request.setAttribute("numActualizarConsultVacia", numActualizarVacio);
+                        request.getRequestDispatcher("Prueba?menu=AgregarDoctor&accion=Listar").forward(request, response);
+                    }else{
+                        if(passA.replaceAll("\\r|\\n", "").equals("")){
+                        docConst = new Doctor(colegiadoA, telA, especialidadA, correoA, horEntradaA, horSalidaA, Date.valueOf(fechaInicioA), codigoA, nombreA, dpiA, passA);
+                        int numActualizar = doctorDAO.actualizarSinPass(docConst);
+                        request.setAttribute("numActuConsulta", numActualizar);
+                        request.getRequestDispatcher("Prueba?menu=AgregarDoctor&accion=Listar").forward(request, response);
+                    }else{
+                        String passEnc = DigestUtils.md5Hex(passA);
+                        docConst = new Doctor(colegiadoA, telA, especialidadA, correoA, horEntradaA, horSalidaA, Date.valueOf(fechaInicioA), codigoA, nombreA, dpiA, passEnc);
+                        int numActualizar = doctorDAO.actualizar(docConst);
+                        request.setAttribute("numActuConsulta", numActualizar);
+                        request.getRequestDispatcher("Prueba?menu=AgregarDoctor&accion=Listar").forward(request, response);
+                    }
+                    }
                     break;
             }
             //request.getRequestDispatcher("Prueba1.jsp").forward(request, response);
@@ -112,7 +147,9 @@ public class ControladorDB extends HttpServlet {
                     request.getRequestDispatcher("AdminAgregarLaboratorista.jsp").forward(request, response);
                     break;
                 case "Agregar":
-                    String codigo = request.getParameter("txtCodigoLab");
+                    Random rng = new Random();
+                    int dig3 = rng.nextInt(900)+100;
+                    String codigo = String.valueOf("LAB-" + dig3);
                     String nombre = request.getParameter("txtNombreLab");
                     String numRegistro = request.getParameter("txtNoRegistroLab");
                     String dpi = request.getParameter("txtDpiLab");
@@ -120,10 +157,21 @@ public class ControladorDB extends HttpServlet {
                     String tipoExamen = request.getParameter("txtTipoExamenLab");
                     String correo = request.getParameter("txtCorreoLab");
                     String fechaInicio = request.getParameter("txtITLab");
-                    String pass = request.getParameter("txtPassLab");
-                    lab = new Laboratorista(codigo, nombre, dpi, pass, numRegistro, tel, tipoExamen, correo, Date.valueOf(fechaInicio));
-                    laboratoristaDAO.agregar(lab);
-                    request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
+                    String pass = DigestUtils.md5Hex(request.getParameter("txtPassLab"));
+                    if(codigo.replaceAll("\\r|\\n", "").equals("")||nombre.replaceAll("\\r|\\n", "").equals("")||
+                            numRegistro.replaceAll("\\r|\\n", "").equals("")||dpi.replaceAll("\\r|\\n", "").equals("")||
+                            tel.replaceAll("\\r|\\n", "").equals("")||tipoExamen.replaceAll("\\r|\\n", "").equals("")||
+                            correo.replaceAll("\\r|\\n", "").equals("")||fechaInicio.replaceAll("\\r|\\n", "").equals("")||
+                            pass.replaceAll("\\r|\\n", "").equals("")){
+                        int numAgregarVacio = 5;
+                        request.setAttribute("numVacioConsulta", numAgregarVacio);
+                        request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
+                    }else{
+                        lab = new Laboratorista(codigo, nombre, dpi, pass, numRegistro, tel, tipoExamen, correo, Date.valueOf(fechaInicio));
+                        int numAgregar = laboratoristaDAO.agregar(lab);
+                        request.setAttribute("numAgregado", numAgregar);
+                        request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
+                    }
                     break;
                 case "Editar":
                     id = request.getParameter("id");
@@ -132,7 +180,6 @@ public class ControladorDB extends HttpServlet {
                     request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
                     break;
                 case "Actualizar":
-                    //String codigoA = request.getParameter("txtCodigoLab");
                     String nombreA = request.getParameter("txtNombreLab");
                     String numRegistroA = request.getParameter("txtNoRegistroLab");
                     String dpiA = request.getParameter("txtDpiLab");
@@ -141,9 +188,27 @@ public class ControladorDB extends HttpServlet {
                     String correoA = request.getParameter("txtCorreoLab");
                     String fechaInicioA = request.getParameter("txtITLab");
                     String passA = request.getParameter("txtPassLab");
-                    lab = new Laboratorista(id, nombreA, dpiA, passA, numRegistroA, telA, tipoExamenA, correoA, Date.valueOf(fechaInicioA));
-                    laboratoristaDAO.actualizar(lab);
-                    request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
+                    if(nombreA.replaceAll("\\r|\\n", "").equals("")|| numRegistroA.replaceAll("\\r|\\n", "").equals("")||
+                            dpiA.replaceAll("\\r|\\n", "").equals("")||telA.replaceAll("\\r|\\n", "").equals("")||
+                            tipoExamenA.replaceAll("\\r|\\n", "").equals("")||correoA.replaceAll("\\r|\\n", "").equals("")||
+                            fechaInicioA.replaceAll("\\r|\\n", "").equals("")){
+                        int numActualizarVacio = 6;
+                        request.setAttribute("numActualizarConsultVacia", numActualizarVacio);
+                        request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
+                    }else{
+                        if(passA.replaceAll("\\r|\\n", "").equals("")){
+                        lab = new Laboratorista(id, nombreA, dpiA, passA, numRegistroA, telA, tipoExamenA, correoA, Date.valueOf(fechaInicioA));
+                        int numActualizarSinPass = laboratoristaDAO.actualizarSinPass(lab);
+                        request.setAttribute("numActuConsulta", numActualizarSinPass);
+                        request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
+                    }else{
+                        String passAEncr = DigestUtils.md5Hex(passA);
+                        lab = new Laboratorista(id, nombreA, dpiA, passAEncr, numRegistroA, telA, tipoExamenA, correoA, Date.valueOf(fechaInicioA));
+                        int numActualizarConPass = laboratoristaDAO.actualizar(lab);
+                        request.setAttribute("numActuConsulta", numActualizarConPass);
+                        request.getRequestDispatcher("Prueba?menu=AgregarLaboratorista&accion=Listar").forward(request, response);
+                    }
+                    }
                     break;
             }
         }else if(menu.equals("AgregarPaciente")){
@@ -163,10 +228,21 @@ public class ControladorDB extends HttpServlet {
                     String peso = request.getParameter("txtPesoPac");
                     String tipoSangre = request.getParameter("txtTipoSanPac");
                     String correo = request.getParameter("txtCorreoPac");
-                    String pass = request.getParameter("txtPassPac");
-                    Paciente pacient = new Paciente(codigo, nombre, dpi, pass, genero, Date.valueOf(fechaNac),tel, Double.parseDouble(peso), tipoSangre, correo);
-                    pacienteDAO.agregar(pacient);
-                    request.getRequestDispatcher("Prueba?menu=AgregarPaciente&accion=Listar").forward(request, response);
+                    String pass = DigestUtils.md5Hex(request.getParameter("txtPassPac"));
+                    if(codigo.replaceAll("\\r|\\n", "").equals("")|| nombre.replaceAll("\\r|\\n", "").equals("")||
+                            genero.replaceAll("\\r|\\n", "").equals("")||fechaNac.replaceAll("\\r|\\n", "").equals("")||
+                            dpi.replaceAll("\\r|\\n", "").equals("")||tel.replaceAll("\\r|\\n", "").equals("")||
+                            peso.replaceAll("\\r|\\n", "").equals("")||tipoSangre.replaceAll("\\r|\\n", "").equals("")||
+                            correo.replaceAll("\\r|\\n", "").equals("")||pass.replaceAll("\\r|\\n", "").equals("")){
+                        int numAgregarVacio = 5;
+                        request.setAttribute("numVacioConsulta", numAgregarVacio);
+                        request.getRequestDispatcher("Prueba?menu=AgregarPaciente&accion=Listar").forward(request, response);
+                    }else{
+                        Paciente pacient = new Paciente(codigo, nombre, dpi, pass, genero, Date.valueOf(fechaNac),tel, Double.parseDouble(peso), tipoSangre, correo);
+                        int numAgregar = pacienteDAO.agregar(pacient);
+                        request.setAttribute("numAgregado", numAgregar);
+                        request.getRequestDispatcher("Prueba?menu=AgregarPaciente&accion=Listar").forward(request, response);
+                    }
                     break;
                 case "Editar":
                     id = request.getParameter("id");
@@ -185,9 +261,28 @@ public class ControladorDB extends HttpServlet {
                     String tipoSangreA = request.getParameter("txtTipoSanPac");
                     String correoA = request.getParameter("txtCorreoPac");
                     String passA = request.getParameter("txtPassPac");
-                    Paciente pacientA = new Paciente(codigoA, nombreA, dpiA, passA, generoA, Date.valueOf(fechaNacA),telA, Double.parseDouble(pesoA), tipoSangreA, correoA);
-                    pacienteDAO.actualizar(pacientA);
-                    request.getRequestDispatcher("Prueba?menu=AgregarPaciente&accion=Listar").forward(request, response);
+                    if(codigoA.replaceAll("\\r|\\n", "").equals("")||nombreA.replaceAll("\\r|\\n", "").equals("")||
+                            generoA.replaceAll("\\r|\\n", "").equals("")||fechaNacA.replaceAll("\\r|\\n", "").equals("")||
+                            dpiA.replaceAll("\\r|\\n", "").equals("")||telA.replaceAll("\\r|\\n", "").equals("")||
+                            pesoA.replaceAll("\\r|\\n", "").equals("")||tipoSangreA.replaceAll("\\r|\\n", "").equals("")||
+                            correoA.replaceAll("\\r|\\n", "").equals("")){
+                        int numActualizarVacio = 6;
+                        request.setAttribute("numActualizarConsultVacia", numActualizarVacio);
+                        request.getRequestDispatcher("Prueba?menu=AgregarPaciente&accion=Listar").forward(request, response);
+                    }else{
+                        if(passA.replaceAll("\\r|\\n", "").equals("")){
+                        Paciente pacientA = new Paciente(codigoA, nombreA, dpiA, passA, generoA, Date.valueOf(fechaNacA),telA, Double.parseDouble(pesoA), tipoSangreA, correoA);
+                        int numActualizarSinPass = pacienteDAO.actualizarSinPass(pacientA);
+                        request.setAttribute("numActuConsulta", numActualizarSinPass);
+                        request.getRequestDispatcher("Prueba?menu=AgregarPaciente&accion=Listar").forward(request, response);
+                    }else{
+                        String passAEnce = DigestUtils.md5Hex(passA);
+                        Paciente pacientA = new Paciente(codigoA, nombreA, dpiA, passAEnce, generoA, Date.valueOf(fechaNacA),telA, Double.parseDouble(pesoA), tipoSangreA, correoA);
+                        int numActualizarConPass = pacienteDAO.actualizar(pacientA);
+                        request.setAttribute("numActuConsulta", numActualizarConPass);
+                        request.getRequestDispatcher("Prueba?menu=AgregarPaciente&accion=Listar").forward(request, response);
+                    }
+                    }
                     break;
             }
         }else if(menu.equals("AgregarEspecialidad")){
@@ -199,16 +294,29 @@ public class ControladorDB extends HttpServlet {
                     break;
                 case "Buscar":
                     id = request.getParameter("txtBuscarDocEsp");
-                    Doctor doc = doctorDAO.listarId(id);
-                    request.setAttribute("buscarDoctorEs", doc);
-                    request.getRequestDispatcher("Prueba?menu=AgregarEspecialidad&accion=Listar").forward(request, response);
+                    if(id.replaceAll("\\r|\\n", "").equals("")){
+                        int buscVacio = 3;
+                        request.setAttribute("numActuConsulta", buscVacio);
+                        request.getRequestDispatcher("Prueba?menu=AgregarEspecialidad&accion=Listar").forward(request, response);
+                    }else{
+                        Doctor doc = doctorDAO.listarId(id);
+                        request.setAttribute("buscarDoctorEs", doc);
+                        request.getRequestDispatcher("Prueba?menu=AgregarEspecialidad&accion=Listar").forward(request, response);
+                    }
                     break;
                 case "Agregar":
                     String codigo = request.getParameter("txtCodigoDoc");
                     String especialidad = request.getParameter("txtEspecialidadDoc");
-                    EspecialidadMedico especialidadMedico = new EspecialidadMedico(codigo, especialidad);
-                    especialidadMedicoDAO.agregar(especialidadMedico);
-                    request.getRequestDispatcher("Prueba?menu=AgregarEspecialidad&accion=Listar").forward(request, response);
+                    if(codigo.replaceAll("\\r|\\n", "").equals("")||especialidad.replaceAll("\\r|\\n", "").equals("")){
+                        int numAgregarVacio = 5;
+                        request.setAttribute("numVacioConsulta", numAgregarVacio);
+                        request.getRequestDispatcher("Prueba?menu=AgregarEspecialidad&accion=Listar").forward(request, response);
+                    }else{
+                        EspecialidadMedico especialidadMedico = new EspecialidadMedico(codigo, especialidad);
+                        int numAgregar = especialidadMedicoDAO.agregar(especialidadMedico);
+                        request.setAttribute("numAgregado", numAgregar);
+                        request.getRequestDispatcher("Prueba?menu=AgregarEspecialidad&accion=Listar").forward(request, response);
+                    }
                     break;
             }
         }else if(menu.equals("ServicioConsultaDoctor")){
@@ -226,16 +334,33 @@ public class ControladorDB extends HttpServlet {
                     break;
                 case "Agregar":
                     String tipo = request.getParameter("txtTipoConsulta");
-                    int costo = Integer.parseInt(request.getParameter("txtCostoConsulta"));
-                    Consulta consult = new Consulta(tipo, costo);
-                    consultaDAO.agregar(consult);
-                    request.getRequestDispatcher("Prueba?menu=ServicioConsultaDoctor&accion=Listar").forward(request, response);
+                    String costoString = request.getParameter("txtCostoConsulta");
+                    //int costo = Integer.parseInt(request.getParameter("txtCostoConsulta"));
+                    if(tipo.replaceAll("\\r|\\n", "").equals("") || costoString.replaceAll("\\r|\\n", "").equals("")){
+                        int numVacioConsulta = 5;
+                        request.setAttribute("numVacioConsulta", numVacioConsulta);
+                        request.getRequestDispatcher("Prueba?menu=ServicioConsultaDoctor&accion=Listar").forward(request, response);
+                    }else{
+                        int costo = Integer.parseInt(request.getParameter("txtCostoConsulta"));
+                        Consulta consult = new Consulta(tipo, costo);
+                        int numAregarConsulta = consultaDAO.agregar(consult);
+                        //JOptionPane.showMessageDialog(null, agregarConsulta);
+                        request.setAttribute("numAgregado", numAregarConsulta);
+                        request.getRequestDispatcher("Prueba?menu=ServicioConsultaDoctor&accion=Listar").forward(request, response);
+                    }
                     break;
                 case "Actualizar":
                     //String tipo = request.getParameter("txtTipoConsulta");
+                    String costoAString = request.getParameter("txtCostoConsulta");
+                    if(costoAString.replaceAll("\\r|\\n", "").equals("")){
+                        int numActualizarConsultaVacia = 6;
+                        request.setAttribute("numActualizarConsultVacia", numActualizarConsultaVacia);
+                        request.getRequestDispatcher("Prueba?menu=ServicioConsultaDoctor&accion=Listar").forward(request, response);
+                    }
                     int costoA = Integer.parseInt(request.getParameter("txtCostoConsulta"));
                     Consulta consul = new Consulta(id, costoA);
-                    consultaDAO.actualizar(consul);
+                    int numActualizarConsulta = consultaDAO.actualizar(consul);
+                    request.setAttribute("numActuConsulta", numActualizarConsulta);
                     request.getRequestDispatcher("Prueba?menu=ServicioConsultaDoctor&accion=Listar").forward(request, response);
                     break;
             }
@@ -253,26 +378,48 @@ public class ControladorDB extends HttpServlet {
                     request.getRequestDispatcher("Prueba?menu=AgregarExamenLab&accion=Listar").forward(request, response);
                     break;
                 case "Agregar":
-                    String codigo = request.getParameter("txtCodigoEx");
+                    Random rng = new Random();
+                    int dig3 = rng.nextInt(900)+100;
+                    String codigo = String.valueOf(dig3);
                     String tipoEx = request.getParameter("txtNombreEx");
                     String orden = request.getParameter("txtOrdenEx");
                     String descripcion = request.getParameter("txtDescripcionEx");
-                    double costo = Double.parseDouble(request.getParameter("txtCostoEx"));
+                    String costoString = request.getParameter("txtCostoEx");
                     String informe = request.getParameter("txtInformeEx");
-                    Examen examen = new Examen(codigo, tipoEx, orden, descripcion, costo, informe);
-                    examenDAO.agregar(examen);
-                    request.getRequestDispatcher("Prueba?menu=AgregarExamenLab&accion=Listar").forward(request, response);
+                    if(codigo.replaceAll("\\r|\\n", "").equals("") || tipoEx.replaceAll("\\r|\\n", "").equals("") || orden.replaceAll("\\r|\\n", "").equals("")
+                            || descripcion.replaceAll("\\r|\\n", "").equals("") || costoString.replaceAll("\\r|\\n", "").equals("")
+                            ||informe.replaceAll("\\r|\\n", "").equals("")){
+                        int numCasillasVacias = 5;
+                        request.setAttribute("numVacioConsulta", numCasillasVacias);
+                        request.getRequestDispatcher("Prueba?menu=AgregarExamenLab&accion=Listar").forward(request, response);
+                    }else{
+                        double costo = Double.parseDouble(request.getParameter("txtCostoEx"));
+                        Examen examen = new Examen(codigo, tipoEx, orden, descripcion, costo, informe);
+                        int agregarExamenLab = examenDAO.agregar(examen);
+                        request.setAttribute("numAgregado", agregarExamenLab);
+                        request.getRequestDispatcher("Prueba?menu=AgregarExamenLab&accion=Listar").forward(request, response);
+                    }
                     break;
                 case "Actualizar":
                     String codigoA = request.getParameter("txtCodigoEx");
                     String tipoExA = request.getParameter("txtNombreEx");
                     String ordenA = request.getParameter("txtOrdenEx");
                     String descripcionA = request.getParameter("txtDescripcionEx");
-                    double costoA = Double.parseDouble(request.getParameter("txtCostoEx"));
+                    String costoAString = request.getParameter("txtCostoEx");
                     String informeA = request.getParameter("txtInformeEx");
-                    Examen examenA = new Examen(codigoA, tipoExA, ordenA, descripcionA, costoA, informeA);
-                    examenDAO.actualizar(examenA);
-                    request.getRequestDispatcher("Prueba?menu=AgregarExamenLab&accion=Listar").forward(request, response);
+                    if(codigoA.replaceAll("\\r|\\n", "").equals("") || tipoExA.replaceAll("\\r|\\n", "").equals("")
+                            || ordenA.replaceAll("\\r|\\n", "").equals("") || descripcionA.replaceAll("\\r|\\n", "").equals("")
+                            || costoAString.replaceAll("\\r|\\n", "").equals("") || informeA.replaceAll("\\r|\\n", "").equals("")){
+                        int numActualizarVacio = 6;
+                        request.setAttribute("numActualizarConsultVacia", numActualizarVacio);
+                        request.getRequestDispatcher("Prueba?menu=AgregarExamenLab&accion=Listar").forward(request, response);
+                    }else{
+                        double costoA = Double.parseDouble(request.getParameter("txtCostoEx"));
+                        Examen examenA = new Examen(codigoA, tipoExA, ordenA, descripcionA, costoA, informeA);
+                        int numActualizar = examenDAO.actualizar(examenA);
+                        request.setAttribute("numActuConsulta", numActualizar);
+                        request.getRequestDispatcher("Prueba?menu=AgregarExamenLab&accion=Listar").forward(request, response);
+                    }
                     break;
             }
         }

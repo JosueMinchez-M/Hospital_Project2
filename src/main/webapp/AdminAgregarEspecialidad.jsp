@@ -13,11 +13,6 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <title>JSP Page</title>
         <style>
-            .scrollableFormulario{
-                height: 200px;
-                width: 1300px;
-                overflow-y: scroll;
-            }
             .scrollableTabla{
                 height: 250px;
                 overflow-y: scroll;
@@ -29,6 +24,26 @@
         </style>
     </head>
     <body>
+        <c:if test="${numAgregado eq 1}">
+            <div class="alert alert-success text-center" role="alert">
+                Especialidad de Doctor Registrada Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numAgregado eq 2}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Registro la especialidad de el Doctor
+            </div>
+        </c:if>
+        <c:if test="${numActuConsulta eq 3}">
+            <div class="alert alert-success text-center" role="alert">
+                El campo buscar Doctor está Vacío, debes de agregar el código del Doctor
+            </div>
+        </c:if>
+        <c:if test="${numVacioConsulta eq 5}">
+            <div class="alert alert-warning text-center" role="alert">
+                ¡Upss! Algun campo se Encuentra Vacío
+            </div>
+        </c:if>
         <h2 class="text-center">Agregar Especialidad Doctor</h2>
             <div>
                 <div>
@@ -41,7 +56,7 @@
                             <input type="hidden" value="" name="" class="form-control" placeholder="">
                           </div>
                           <div class="col">
-                              <input class="form-control mr-sm-2" name="txtBuscarDocEsp" type="search" placeholder="Buscar" aria-label="Search">
+                              <input class="form-control mr-sm-2" name="txtBuscarDocEsp" type="search" placeholder="Buscar Código Doctor" aria-label="Search">
                           </div>
                           <div class="col">
                               <input class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="Buscar" formaction="Prueba?menu=AgregarEspecialidad&accion=Buscar">

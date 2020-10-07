@@ -54,7 +54,9 @@ public class ExamenDAO {
             ps.setDouble(5, examen.getCosto());
             ps.setString(6, examen.getInforme());          
             ps.executeUpdate();
+            respuesta = 1;
         } catch (Exception e) {
+            respuesta = 2;
         }
         return respuesta;
     }
@@ -92,7 +94,9 @@ public class ExamenDAO {
             ps.setString(5, ex.getInforme());
             ps.setString(6, ex.getCodigo());
             ps.executeUpdate();
+            respuesta = 3;
         } catch (Exception e) {
+            respuesta=4;
         }
         return respuesta;
     }

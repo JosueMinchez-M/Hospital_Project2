@@ -88,7 +88,9 @@ public class PacienteDAO {
             ps.setString(9, paciente.getCorreo());
             ps.setString(10, paciente.getPassword());           
             ps.executeUpdate();
+            respuesta = 1;
         } catch (Exception e) {
+            respuesta = 2;
         }
         return respuesta;
     }
@@ -134,7 +136,31 @@ public class PacienteDAO {
             ps.setString(9, paci.getPassword());  
             ps.setString(10, paci.getCodigo());
             ps.executeUpdate();
+            respuesta = 3;
         } catch (Exception e) {
+            respuesta = 4;
+        }
+        return respuesta;
+    }
+    public int actualizarSinPass(Paciente paci){
+        String sql = "UPDATE Paciente SET nombre=?, sexo=?, fecha_nacimiento=?, dpi=?, telefono=?, "
+                + "peso_kg=?, tipo_sangre=?, correo_electronico=? WHERE codigo=?";
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            ps.setString(1, paci.getNombre());
+            ps.setString(2, paci.getSexo());
+            ps.setDate(3, paci.getFecha_nacimiento());
+            ps.setString(4, paci.getDpi());
+            ps.setString(5, paci.getTelefono());
+            ps.setDouble(6, paci.getPeso_kg());
+            ps.setString(7, paci.getTipo_Sangre());
+            ps.setString(8, paci.getCorreo());
+            ps.setString(9, paci.getCodigo());
+            ps.executeUpdate();
+            respuesta = 3;
+        } catch (Exception e) {
+            respuesta = 4;
         }
         return respuesta;
     }

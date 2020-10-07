@@ -86,7 +86,9 @@ public class DoctorDAO {
             ps.setDate(9, doc.getInicio_trabajar());
             ps.setString(10, doc.getPassword());           
             ps.executeUpdate();
+            respuesta = 1;
         } catch (Exception e) {
+            respuesta = 2;
         }
         return respuesta;
     }
@@ -132,7 +134,32 @@ public class DoctorDAO {
             ps.setString(9, doc.getPassword());  
             ps.setString(10, doc.getCodigo());
             ps.executeUpdate();
+            respuesta = 3;
         } catch (Exception e) {
+            respuesta = 4;
+        }
+        return respuesta;
+    }
+    
+    public int actualizarSinPass(Doctor doc){
+        String sql = "UPDATE Medico SET nombre=?, numero_colegiado=?, dpi=?, telefono=?, correo_electronico=?, "
+                + "horario_inicio_trabajo=?, horario_fin_trabajo=?, fecha_inicio_trabajo=? WHERE codigo=?";
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            ps.setString(1, doc.getNombre());
+            ps.setString(2, doc.getColegiado());
+            ps.setString(3, doc.getDpi());
+            ps.setString(4, doc.getTelefono());
+            ps.setString(5, doc.getCorreo());
+            ps.setString(6, doc.getHorario_Inicio());
+            ps.setString(7, doc.getHorario_Fin());
+            ps.setDate(8, doc.getInicio_trabajar()); 
+            ps.setString(9, doc.getCodigo());
+            ps.executeUpdate();
+            respuesta = 3;
+        } catch (Exception e) {
+            respuesta = 4;
         }
         return respuesta;
     }

@@ -29,6 +29,36 @@
         </style>
     </head>
     <body>
+        <c:if test="${numAgregado eq 1}">
+            <div class="alert alert-success text-center" role="alert">
+                Paciente Registrado Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numAgregado eq 2}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Registro el Paciente
+            </div>
+        </c:if>
+        <c:if test="${numActuConsulta eq 3}">
+            <div class="alert alert-success text-center" role="alert">
+                Paciente Actualizado Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numActuConsulta eq 4}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Actualizo el Paciente
+            </div>
+        </c:if>
+        <c:if test="${numVacioConsulta eq 5}">
+            <div class="alert alert-warning text-center" role="alert">
+                ¡Upss! Algun campo se Encuentra Vacío
+            </div>
+        </c:if>
+        <c:if test="${numActualizarConsultVacia eq 6}">
+            <div class="alert alert-warning text-center" role="alert">
+                ¡Upss! Algun campo se Encuentra Vacío
+            </div>
+        </c:if>
             <div>
                 <h2 class="text-center">Agregar/Modificar Paciente </h2>
                 <div>
@@ -68,7 +98,7 @@
                             <input type="text" value="${editarPaciente.getCorreo()}" name="txtCorreoPac" class="form-control" placeholder="Correo Electronico">
                           </div>
                           <div class="col">
-                            <input type="password" value="${editarPaciente.getPassword()}" name="txtPassPac" class="form-control" placeholder="Contraseña">
+                            <input type="password" name="txtPassPac" class="form-control" placeholder="Contraseña">
                           </div>
                           <div class="col">
                             <input type="submit" class="btn btn-primary" name="accion" value="Registrar">

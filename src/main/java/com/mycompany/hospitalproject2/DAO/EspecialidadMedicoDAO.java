@@ -45,7 +45,9 @@ public class EspecialidadMedicoDAO {
             ps.setString(1, especialidadMedico.getCodigo_medico());
             ps.setString(2, especialidadMedico.getEspecialidad());           
             ps.executeUpdate();
+            respuesta = 1;
         } catch (Exception e) {
+            respuesta = 2;
         }
         return respuesta;
     }

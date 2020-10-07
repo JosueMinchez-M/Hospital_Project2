@@ -13,29 +13,54 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <title>JSP Page</title>
         <style>
-            .scrollableFormulario{
-                height: 200px;
-                width: 1300px;
-                overflow-y: scroll;
-            }
             .scrollableTabla{
                 height: 250px;
                 overflow-y: scroll;
             }
             form { 
                 margin: 0 auto; 
-                width:1000px; 
+                width:1260px; 
             } 
         </style>
     </head>
     <body>
+        <c:if test="${numAgregado eq 1}">
+            <div class="alert alert-success text-center" role="alert">
+                Doctor Registrado Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numAgregado eq 2}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Registro el Doctor
+            </div>
+        </c:if>
+        <c:if test="${numActuConsulta eq 3}">
+            <div class="alert alert-success text-center" role="alert">
+                Doctor Actualizado Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numActuConsulta eq 4}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Actualizo el Doctor
+            </div>
+        </c:if>
+        <c:if test="${numVacioConsulta eq 5}">
+            <div class="alert alert-warning text-center" role="alert">
+                ¡Upss! Algun campo se Encuentra Vacío
+            </div>
+        </c:if>
+        <c:if test="${numActualizarConsultVacia eq 6}">
+            <div class="alert alert-warning text-center" role="alert">
+                ¡Upss! Algun campo se Encuentra Vacío
+            </div>
+        </c:if>
             <div>
                 <h2 class="text-center">Agregar Doctor</h2>
                 <div>
                     <form action="Prueba?menu=AgregarDoctor&accion=Agregar" method="POST">
                         <div class="row">
                           <div class="col">
-                            <input type="text" value="${editarDoctor.getCodigo()}" name="txtCodigoDoc" class="form-control" placeholder="Código(obligatorio)">
+                              <input type="text" value="${editarDoctor.getCodigo()}" name="txtCodigoDoc" class="form-control" placeholder="Código Generado Automático" readonly>
                           </div>
                           <div class="col">
                             <input type="text" value="${editarDoctor.getNombre()}" name="txtNombreDoc" class="form-control" placeholder="Nombre(obligatorio)">
@@ -68,7 +93,7 @@
                             <input type="text" value="${editarDoctor.getInicio_trabajar()}" name="txtITDoc" class="form-control" placeholder="Fecha que Inicio Trabajar">
                           </div>
                           <div class="col">
-                            <input type="password" value="${editarDoctor.getPassword()}" name="txtPassDoc" class="form-control" placeholder="Contraseña(obligatorio)">
+                            <input type="password" name="txtPassDoc" class="form-control" placeholder="Contraseña (Ingresar si es necesario)">
                           </div>
                           <div class="col">
                             <input type="submit" class="btn btn-primary" name="accion" value="Registrar">
