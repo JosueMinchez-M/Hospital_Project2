@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jdk.nashorn.api.tree.Tree;
 
 /**
  *
@@ -125,6 +126,57 @@ public class ControladorMedicoDB extends HttpServlet {
                         request.setAttribute("listaCitaDoc", listaCitaDo);
                         request.getRequestDispatcher("DoctorInforme.jsp").forward(request, response);
                     }
+                    break;
+            }
+        }else if(menu.equals("Consulta1")){
+            switch(accion){
+                case "BuscarListar":
+                    String codigoPaciente = request.getParameter("txtBuscarCodigoPaciente");
+                    String codMedicoBusLis = request.getParameter("txtCodPacieConsulta1");
+                    request.setAttribute("codDoc", codMedicoBusLis);
+                    List lista = citaDAO.listarCitaRealizadaMedicoCodPacyMed(codigoPaciente, codMedicoBusLis);
+                    request.setAttribute("listaBuscConsulta1", lista);
+                    request.getRequestDispatcher("DoctorConsulta1.jsp").forward(request, response);
+                    break;
+                case "MostrarCodigo":
+                    String codMedico = request.getParameter("txtCodigotx");
+                    request.setAttribute("codDoc", codMedico);
+                    request.getRequestDispatcher("DoctorConsulta1.jsp").forward(request, response);
+                    break;
+            }
+        }else if(menu.equals("Consulta2")){
+            switch(accion){
+                case "BuscarListar":
+                    String fechaMenor = request.getParameter("txtBuscarFechaMenor");
+                    String fechaMayor = request.getParameter("txtBuscarFechaMayor");
+                    String codMedicoBusLis = request.getParameter("txtCodigoPaci");
+                    request.setAttribute("codDoc", codMedicoBusLis);
+                    List lista = citaDAO.listarConsulta2Medico(codMedicoBusLis, fechaMenor, fechaMayor);
+                    request.setAttribute("listaBuscConsulta2", lista);
+                    request.getRequestDispatcher("DoctorConsulta2.jsp").forward(request, response);
+                    break;
+                case "MostrarCodigo":
+                    String codMedico = request.getParameter("txtCodigotx");
+                    request.setAttribute("codDoc", codMedico);
+                    request.getRequestDispatcher("DoctorConsulta2.jsp").forward(request, response);
+                    break;
+            }
+        }else if(menu.equals("Consulta3")){
+            switch(accion){
+                case "Listar":
+                    String codMedico = request.getParameter("txtCodigotx");
+                    List listaConsulta3 = citaDAO.listarConsulta3Medico(codMedico);
+                    request.setAttribute("listaBuscConsulta3", listaConsulta3);
+                    request.getRequestDispatcher("DoctorConsulta3.jsp").forward(request, response);
+                    break;
+            }
+        }else if(menu.equals("Consulta4")){
+            switch(accion){
+                case "Listar":
+                    String codMedico = request.getParameter("txtCodigotx");
+                    List listaConsulta4 = reporteDAO.listar(codMedico);
+                    request.setAttribute("listaBuscConsulta4", listaConsulta4);
+                    request.getRequestDispatcher("DoctorConsulta4.jsp").forward(request, response);
                     break;
             }
         }

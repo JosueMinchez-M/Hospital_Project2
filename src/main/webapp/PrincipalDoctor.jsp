@@ -39,6 +39,20 @@
                       </form>
                   </div>
                 </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Consultas
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <form action ="ControladorMedicoDB?menu=Consulta1&accion=MostrarCodigo" method="POST">
+                          <input type="text" value="<%out.println(request.getAttribute("codigoDoctor"));%>" name="txtCodigotx" class="form-control" readonly>
+                      <input type="submit" class="dropdown-item" name="accion" formtarget="frameDoctor" value="Historial Medico de los Pacientes">
+                      <input type="submit" class="dropdown-item" name="accion" formtarget="frameDoctor" formaction="ControladorMedicoDB?menu=Consulta2&accion=MostrarCodigo" value="Citas agendadas en un intervalo de tiempo">
+                      <input type="submit" class="dropdown-item" name="accion" formtarget="frameDoctor" formaction="ControladorMedicoDB?menu=Consulta3&accion=Listar" value="Citas para el día en curso">
+                      <input type="submit" class="dropdown-item" name="accion" formtarget="frameDoctor" formaction="ControladorMedicoDB?menu=Consulta4&accion=Listar" value="Pacientes con mayor cantidad de informes médicos">
+                      </form>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="dropdown">

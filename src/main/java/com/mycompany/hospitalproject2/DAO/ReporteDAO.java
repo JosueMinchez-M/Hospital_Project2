@@ -5,6 +5,8 @@ import com.mycompany.hospitalproject2.conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -36,5 +38,23 @@ public class ReporteDAO {
             respuesta = 2;
         }
         return respuesta;
+    }
+    public List listar(String codMedico){
+        String sql = "SELECT Paciente_codigo, COUNT(*) FROM Informe WHERE Medico_codigo = '"+codMedico+"' GROUP "
+                + "BY Paciente_codigo,Medico_codigo;";
+        List <Reporte>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Reporte rep = new Reporte();
+                rep.setPaciente(rs.getString(1));;
+                rep.setHora(rs.getString(2));
+                lista.add(rep);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
     }
 }
