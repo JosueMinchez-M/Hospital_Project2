@@ -28,6 +28,43 @@
         </style>
     </head>
     <body>
+        <c:if test="${numAgregado eq 1}">
+            <div class="alert alert-success text-center" role="alert">
+                Cita Registrada Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numAgregado eq 2}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Registro la Cita
+            </div>
+        </c:if>
+        <c:if test="${numVacioConsulta eq 3}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un error! La Casilla de Busqueda por el Nombre se Encuentra Vacía
+            </div>
+        </c:if>
+        <c:if test="${numBusqEspecialidad eq 4}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! La Casilla de Busqueda por Especialidad se Encuentra Vacía
+            </div>
+        </c:if>
+        <c:if test="${numBusRango eq 5}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! Alguna Casilla de Busqueda por Rango de Fecha se Encuentra Vacía
+            </div>
+        </c:if>
+        <c:if test="${numVacioConsulta eq 6}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! Alguna Casilla se Encuentra Vacía
+            </div>
+        </c:if>
+        <c:if test="${numVerificar eq 7}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! La especialidad para ese Doctor No Existe
+            </div>
+        </c:if>
+        <h2 class="text-center">Busque y Seleccione al Doctor</h2>
+        <br>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -44,9 +81,10 @@
                   <input class="form-control mr-sm-2" name="txtBuscarFechaMenorDoctor" type="search" placeholder="Fecha Menor(0000-00-00)" aria-label="Search">
                   <input class="form-control mr-sm-2" name="txtBuscarFechaMayorMedic" type="search" placeholder="Fecha Mayor(0000-00-00)" aria-label="Search">
                   <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" formaction="ControladorPacienteDB?menu=AgendarCitaDoctor&accion=BuscarRangoFecha">Buscar</button>
+                  <input class="form-control mr-sm-2" name="txtCodPacienteBusq" value="${codPacient}" type="hidden">
                   <div>
                       </br>
-                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" formaction="ControladorPacienteDB?menu=AgendarCitaDoctor&accion=Listar">Mostrar Todo</button>
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" formaction="ControladorPacienteDB?menu=AgendarCitaDoctor&accion=MostrarTodo">Mostrar Todo</button>
                   </div>
               </form>
             </div>
@@ -65,6 +103,7 @@
                         <th>Horario Salida</th>
                         <th>Fecha de Inicio Trabajar</th>
                         <th>Especialidad</th>
+                        <th>Accion</th>
                     </tr>
                   </thead>
                     <tbody>
@@ -79,6 +118,12 @@
                                 <td>${listEspJoin.getHorario_Fin()}</td>
                                 <td>${listEspJoin.getInicio_trabajar()}</td>
                                 <td>${listEspJoin.getEspecialidad()}</td>
+                                <td>
+                                    <form class="input-group" action="ControladorPacienteDB?menu=AgendarCitaDoctor&accion=Editar&id=${listEspJoin.getCodigo()}" method="POST">
+                                        <input type="hidden" value="${codPacient}" name="txtCodPacientTabla" class="form-control">
+                                        <input class="btn btn-warning" type="submit" name="accion" value="Seleccionar">
+                                    </form>
+                                </td>
                             </tr>
                         </c:forEach>    
                     </tbody>
@@ -109,25 +154,27 @@
             </br>
             </br>
                 <div>
+                    <h2 class="text-center">Llene estos Campos para completar el Registro de su Consulta con el Doctor</h2>
+                    <br>
                     <form action="ControladorPacienteDB?menu=AgendarCitaDoctor&accion=AgregarCita" method="POST">
                         <div class="row">
                           <div class="col">
-                            <input type="text" name="txtEspecialidadCita" class="form-control" placeholder="Especialidad">
+                            <input type="text" value="${editarCitaDoc.getEspecialidad()}" name="txtEspecialidadCita" class="form-control" placeholder="Especialidad">
                           </div>
                           <div class="col">
                             <input type="text" name="txtFechaCita" class="form-control" placeholder="Fecha de la Cita">
                           </div>
                           <div class="col">
-                            <input type="text" name="txtHoraCita" class="form-control" placeholder="Hora de la Consulta">
+                              <input type="text" name="txtHoraCita" class="form-control" placeholder="Hora de la Consulta">
                           </div>
                           <div class="col">
-                            <input type="text" name="txtCodigoPacienteCita" class="form-control" placeholder="Codigo Paciente">
+                              <input type="text" value="${codPacient}" name="txtCodigoPacienteCita" class="form-control" placeholder="Codigo Paciente">
                           </div>
                         </div>
                         </br>
                         <div class="row">
                           <div class="col">
-                            <input type="text" name="txtCodigoDoctorCita" class="form-control" placeholder="Codigo Doctor">
+                            <input type="text" value="${editarCitaDoc.getCodigo()}" name="txtCodigoDoctorCita" class="form-control" placeholder="Codigo Doctor">
                           </div>
                           <div class="col">
                               <input type="submit" class="btn btn-primary" name="accion" value="Registrar">

@@ -41,6 +41,57 @@ public class ExamenDAO {
         }
         return lista;
     }
+    //SELECT codigo, nombre FROM ExamenLaboratorio WHERE codigo = '"+codExamen+"'
+    public List listarCodEx(){
+        String sql = "SELECT codigo, nombre FROM ExamenLaboratorio";
+        List <Examen>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Examen ex = new Examen();
+                ex.setCodigo(rs.getString(1));
+                ex.setNombre(rs.getString(2));
+                lista.add(ex);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    public List listarCodExVerificar(String codExamen){
+        String sql = "SELECT codigo, nombre FROM ExamenLaboratorio WHERE codigo = '"+codExamen+"'";
+        List <Examen>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Examen ex = new Examen();
+                ex.setCodigo(rs.getString(1));
+                ex.setNombre(rs.getString(2));
+                lista.add(ex);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    public List listarCodExVerificarOrden(String codExamen){
+        String sql = "SELECT requerimiento_orden_medico  FROM ExamenLaboratorio WHERE codigo = '"+codExamen+"'";
+        List <Examen>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Examen ex = new Examen();
+                ex.setCodigo(rs.getString(1));
+                lista.add(ex);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
     public int agregar(Examen examen){
         String sql = "INSERT INTO ExamenLaboratorio(codigo, nombre, requerimiento_orden_medico, descripcion, costo, "
                 + "informe) VALUES(?, ?, ?, ?, ?, ?)";

@@ -33,6 +33,36 @@
         </style>
     </head>
     <body>
+        <c:if test="${numAgregado eq 1}">
+            <div class="alert alert-success text-center" role="alert">
+                Registrado Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numAgregado eq 2}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Registro
+            </div>
+        </c:if>
+        <c:if test="${numActuConsulta eq 3}">
+            <div class="alert alert-success text-center" role="alert">
+                Examen Actualizado Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numActuConsulta eq 4}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Actualizo la Consulta
+            </div>
+        </c:if>
+        <c:if test="${numVacioConsulta eq 5}">
+            <div class="alert alert-warning text-center" role="alert">
+                ¡Upss! Algun campo se Encuentra Vacío
+            </div>
+        </c:if>
+        <c:if test="${numActualizarConsultVacia eq 6}">
+            <div class="alert alert-warning text-center" role="alert">
+                ¡Upss! Algun campo se Encuentra Vacío
+            </div>
+        </c:if>
         <h1 class="text-center">Buscador de Citas</h1>
         <div class="form-group">
             <form action="ControladorMedicoDB?menu=InformeMedico&accion=BuscarCodigoCita" method="POST">
@@ -76,7 +106,7 @@
                                 <td>
                                     <form class="input-group" action="ControladorMedicoDB?menu=InformeMedico&accion=Editar&id=${listCitaDoc.getCodigo()}" method="POST">
                                         <input type="hidden" name="txtCodTabla" value="${codMedico}" class="form-control">
-                                        <input type="submit" class="btn btn-warning" name="accion" value="Editar">
+                                        <input type="submit" class="btn btn-warning" name="accion" value="Seleccionar">
                                     </form>
                                 </td>
                             </tr>
@@ -95,7 +125,7 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">Informe Paciente</span>
                                 </div>
-                                <textarea class="form-control" aria-label="With textarea" name="txtAreaInforme" placeholder="Redacte aqui informe del paciente"></textarea>
+                                <textarea class="form-control" aria-label="With textarea" name="txtAreaInforme" placeholder="Redacte aqui informe del paciente">${editarCitaDoc.getEspecialidad()}</textarea>
                             </div>
                         </div>
                         </br>

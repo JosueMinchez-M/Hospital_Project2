@@ -31,7 +31,9 @@ public class ReporteDAO {
             ps.setString(5, rep.getPaciente());
             ps.setString(6, rep.getMedico());           
             ps.executeUpdate();
+            respuesta = 1;
         } catch (Exception e) {
+            respuesta = 2;
         }
         return respuesta;
     }

@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -166,20 +167,22 @@ public class EspecialidadMedicoDAO {
         }
         return lista;
     }
-//    public EspecialidadMedico listarId(String codEsMed){
-//        EspecialidadMedico eM = new EspecialidadMedico();
-//        String sql = "SELECT * FROM especialidad_medico WHERE Medico_codigo =?";
-//        try {
-//            acceso = conexion.Conectar();
-//            ps = acceso.prepareStatement(sql);
-//            ps.setString(1, codEsMed);
-//            rs = ps.executeQuery();
-//            while(rs.next()){
-//                eM.setEspecialidad(rs.getString("Especialidad_titulo"));
-//                eM.setCodigo_medico(rs.getString("Medico_codigo"));
-//            }
-//        } catch (Exception e) {
-//        }
-//        return eM;
-//    }
+    public List verificarEspecialidadDoc(String espe, String codMedico){
+        String sql = "SELECT * FROM especialidad_medico WHERE Medico_codigo = '"+codMedico+"' AND Especialidad_titulo = '"+espe+"'";
+        List <Doctor>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Doctor doc = new Doctor();
+                doc.setCodigo(rs.getString(1));
+                doc.setEspecialidad(rs.getString(2));
+                lista.add(doc);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "NO EXISTE NINGUNO");
+        }
+        return lista;
+    }
 }

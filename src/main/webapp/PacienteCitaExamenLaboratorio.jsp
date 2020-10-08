@@ -28,6 +28,43 @@
         </style>
     </head>
     <body>
+        <c:if test="${numAgregado eq 1}">
+            <div class="alert alert-success text-center" role="alert">
+                Cita Registrada Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numAgregado eq 2}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Registro la Cita
+            </div>
+        </c:if>
+        <c:if test="${numVacioConsulta eq 3}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un error! La Casilla de Busqueda por el Nombre se Encuentra Vacía
+            </div>
+        </c:if>
+        <c:if test="${numBusqEspecialidad eq 4}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! La Casilla de Busqueda por Examen se Encuentra Vacía
+            </div>
+        </c:if>
+        <c:if test="${numBusRango eq 5}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! Alguna Casilla de Busqueda por Rango de Fecha se Encuentra Vacía
+            </div>
+        </c:if>
+        <c:if test="${numVacioConsulta eq 6}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! Alguna Casilla se Encuentra Vacía
+            </div>
+        </c:if>
+        <c:if test="${numVerificar eq 7}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! El Examen para el Laboratorista No Existe, verifica en la informacion de la siguiente tabla
+            </div>
+        </c:if>
+        <h2 class="text-center">Busque y Seleccione al Laboratorista</h2>
+        <br>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -44,9 +81,10 @@
                   <input class="form-control mr-sm-2" name="txtBuscarFechaMenorLab" type="search" placeholder="Fecha Menor(0000-00-00)" aria-label="Search">
                   <input class="form-control mr-sm-2" name="txtBuscarFechaMayorLab" type="search" placeholder="Fecha Mayor(0000-00-00)" aria-label="Search">
                   <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" formaction="ControladorPacienteDB?menu=AgendarCitaExamenLab&accion=BuscarRangoFecha">Buscar</button>
+                  <input class="form-control mr-sm-2" name="txtCodPacienteBusq" value="${codPacient}" type="hidden">
                   <div>
                       </br>
-                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" formaction="ControladorPacienteDB?menu=AgendarCitaDoctor&accion=Listar">Mostrar Todo</button>
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" formaction="ControladorPacienteDB?menu=AgendarCitaExamenLab&accion=MostrarTodo">Mostrar Todo</button>
                   </div>
               </form>
             </div>
@@ -63,6 +101,7 @@
                         <th>Tipo Examen</th>
                         <th>Correo Electronico</th>
                         <th>Fecha de Inicio Trabajar</th>
+                        <th>Accion</th>
                     </tr>
                   </thead>
                     <tbody>
@@ -75,6 +114,12 @@
                                 <td>${listLab.getExamen_realizar()}</td>
                                 <td>${listLab.getCorreo()}</td>
                                 <td>${listLab.getFecha_trabajar()}</td>
+                                <td>
+                                    <form class="input-group" action="ControladorPacienteDB?menu=AgendarCitaExamenLab&accion=Editar&id=${listLab.getCodigo()}" method="POST">
+                                        <input type="hidden" value="${codPacient}" name="txtCodPacientTabla" class="form-control">
+                                        <input class="btn btn-warning" type="submit" name="accion" value="Seleccionar">
+                                    </form>
+                                </td>
                             </tr>
                         </c:forEach>    
                     </tbody>
@@ -109,6 +154,7 @@
             </div>
             </br>
             </br>
+            <h2 class="text-center">Complete el Registro de su Cita</h2>
                 <div>
                     <form action="ControladorPacienteDB?menu=AgendarCitaExamenLab&accion=AgregarCita" method="POST">
                         <div class="row">
@@ -122,13 +168,13 @@
                             <input type="text" name="txtHoraCita" class="form-control" placeholder="Hora de la Cita">
                           </div>
                           <div class="col">
-                            <input type="text" name="txtCodigoPacienteCita" class="form-control" placeholder="Codigo Paciente">
+                            <input type="text" name="txtCodigoPacienteCita" value="${codPacient}" class="form-control" placeholder="Codigo Paciente">
                           </div>
                         </div>
                         </br>
                         <div class="row">
                           <div class="col">
-                            <input type="text" name="txtCodigoLaboratoristaCita" class="form-control" placeholder="Codigo Laboratorista">
+                            <input type="text" value="${editarCitaLab.getCodigo()}" name="txtCodigoLaboratoristaCita" class="form-control" placeholder="Codigo Laboratorista">
                           </div>
                           <div class="col">
                               <input type="text" name="txtCodigoDoctorCita" class="form-control" placeholder="Codigo Doctor (Opcional)">

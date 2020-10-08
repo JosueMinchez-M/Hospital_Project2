@@ -48,28 +48,52 @@ public class ControladorMedicoDB extends HttpServlet {
                     String codMedico = request.getParameter("txtCodMedicoInf");
                     String codigoInforme = String.valueOf(generarNumero());
                     String descripInfo = request.getParameter("txtAreaInforme");
-                    Reporte rep = new Reporte(codigoInforme, codPaciente, Date.valueOf(fechaConsulta), horaConsulta, codMedico, descripInfo);
-                    reporteDAO.agregar(rep);
-                    String codigoDocInfo = request.getParameter("txtCodMedicoInf");
-                    request.setAttribute("codMedico", codigoDocInfo.replaceAll("\\r|\\n", ""));
-                    List listaCitaInf = citaDAO.listarCitaDoctor(codMedico);
-                    request.setAttribute("listaCitaDoc", listaCitaInf);
-                    request.getRequestDispatcher("DoctorInforme.jsp").forward(request, response);
+                    if(fechaConsulta.replaceAll("\\r|\\n", "").equals("")|| horaConsulta.replaceAll("\\r|\\n", "").equals("")||
+                            codPaciente.replaceAll("\\r|\\n", "").equals("")|| codMedico.replaceAll("\\r|\\n", "").equals("")||
+                            codigoInforme.replaceAll("\\r|\\n", "").equals("")||descripInfo.replaceAll("\\r|\\n", "").equals("")){
+                        int numAgregarVacio = 5;
+                        request.setAttribute("numVacioConsulta", numAgregarVacio);
+                        String codigoDocInfo = request.getParameter("txtCodMedicoInf");
+                        request.setAttribute("codMedico", codigoDocInfo.replaceAll("\\r|\\n", ""));
+                        List listaCitaInf = citaDAO.listarCitaDoctor(codMedico);
+                        request.setAttribute("listaCitaDoc", listaCitaInf);
+                        request.getRequestDispatcher("DoctorInforme.jsp").forward(request, response);
+                    }else{
+                        Reporte rep = new Reporte(codigoInforme, codPaciente, Date.valueOf(fechaConsulta), horaConsulta, codMedico, descripInfo);
+                        int numAgregar = reporteDAO.agregar(rep);
+                        request.setAttribute("numAgregado", numAgregar);
+                        String codigoDocInfo = request.getParameter("txtCodMedicoInf");
+                        request.setAttribute("codMedico", codigoDocInfo.replaceAll("\\r|\\n", ""));
+                        List listaCitaInf = citaDAO.listarCitaDoctor(codMedico);
+                        request.setAttribute("listaCitaDoc", listaCitaInf);
+                        request.getRequestDispatcher("DoctorInforme.jsp").forward(request, response);
+                    }
                     break;
                 case "AgregarCitaDoctor":
+                    String codigoDocCitaDoc = request.getParameter("txtCodigoDoctorCita");
+                    request.setAttribute("codMedico", codigoDocCitaDoc.replaceAll("\\r|\\n", ""));
                     String especialidad = request.getParameter("txtEspecialidadCita");
                     String fechaCita = request.getParameter("txtFechaCita");
                     String horaCita = request.getParameter("txtHoraCita");
                     String codigoPaciente = request.getParameter("txtCodigoPacienteCita");
                     String codigoDoctor = request.getParameter("txtCodigoDoctorCita");
                     String codigo = String.valueOf(generarNumero());
-                    Cita cita = new Cita(codigo, codigoPaciente, Date.valueOf(fechaCita), horaCita, codigoDoctor, especialidad);
-                    citaDAO.agregar(cita);
-                    String codigoDocCitaDoc = request.getParameter("txtCodigoDoctorCita");
-                    request.setAttribute("codMedico", codigoDocCitaDoc.replaceAll("\\r|\\n", ""));
-                    List listaCitaDoc = citaDAO.listarCitaDoctor(codigoDocCitaDoc);
-                    request.setAttribute("listaCitaDoc", listaCitaDoc);
-                    request.getRequestDispatcher("DoctorInforme.jsp").forward(request, response);
+                    if(especialidad.replaceAll("\\r|\\n", "").equals("")||fechaCita.replaceAll("\\r|\\n", "").equals("")||
+                            horaCita.replaceAll("\\r|\\n", "").equals("")||codigoPaciente.replaceAll("\\r|\\n", "").equals("")||
+                            codigoDoctor.replaceAll("\\r|\\n", "").equals("")||codigo.replaceAll("\\r|\\n", "").equals("")){
+                        int numAgregarCita = 5;
+                        request.setAttribute("numVacioConsulta", numAgregarCita);
+                        List listaCitaDoc = citaDAO.listarCitaDoctor(codigoDocCitaDoc);
+                        request.setAttribute("listaCitaDoc", listaCitaDoc);
+                        request.getRequestDispatcher("DoctorInforme.jsp").forward(request, response);
+                    }else{
+                        Cita cita = new Cita(codigo, codigoPaciente, Date.valueOf(fechaCita), horaCita, codigoDoctor, especialidad);
+                        int numAgregarCitaDoc = citaDAO.agregar(cita);
+                        request.setAttribute("numAgregado", numAgregarCitaDoc);
+                        List listaCitaDoc = citaDAO.listarCitaDoctor(codigoDocCitaDoc);
+                        request.setAttribute("listaCitaDoc", listaCitaDoc);
+                        request.getRequestDispatcher("DoctorInforme.jsp").forward(request, response);
+                    }
                     break;
                 case "MandarCodigo":
                     String codigoDoc = request.getParameter("txtCodigotx");
@@ -92,9 +116,15 @@ public class ControladorMedicoDB extends HttpServlet {
                     String codigoBuscar = request.getParameter("txtBuscarCodigo");
                     String codigoDocCitaDo = request.getParameter("txtCodigoMedico");
                     request.setAttribute("codMedico", codigoDocCitaDo.replaceAll("\\r|\\n", ""));
-                    List listaCitaDo = citaDAO.listarCitaBuscada(codigoBuscar);
-                    request.setAttribute("listaCitaDoc", listaCitaDo);
-                    request.getRequestDispatcher("DoctorInforme.jsp").forward(request, response);
+                    if(codigoBuscar.replaceAll("\\r|\\n", "").equals("")){
+                        int numBuscarCodigo = 5;
+                        request.setAttribute("numVacioConsulta", numBuscarCodigo);
+                        request.getRequestDispatcher("DoctorInforme.jsp").forward(request, response);
+                    }else{
+                        List listaCitaDo = citaDAO.listarCitaBuscada(codigoBuscar);
+                        request.setAttribute("listaCitaDoc", listaCitaDo);
+                        request.getRequestDispatcher("DoctorInforme.jsp").forward(request, response);
+                    }
                     break;
             }
         }

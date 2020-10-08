@@ -1,6 +1,5 @@
 package com.mycompany.hospitalproject2.DAO;
 
-import com.mycompany.hospitalproject2.Doctor;
 import com.mycompany.hospitalproject2.Laboratorista;
 import com.mycompany.hospitalproject2.conexion.Conexion;
 import java.sql.Connection;
@@ -223,6 +222,30 @@ public class LaboratoristaDAO {
                 lab.setExamen_realizar(rs.getString(5));
                 lab.setCorreo(rs.getString(6));
                 lab.setFecha_trabajar(rs.getDate(7));
+                lista.add(lab);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    public List verificarLab(String codExamen, String codLab){
+        String sql = "SELECT * FROM Laboratorista WHERE examen_realiza = (SELECT nombre FROM ExamenLaboratorio WHERE codigo = '"+codExamen+"') AND codigo = '"+codLab+"'";
+        List <Laboratorista>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Laboratorista lab = new Laboratorista();
+                lab.setCodigo(rs.getString(1));
+                lab.setNombre(rs.getString(2));
+                lab.setNumero_registro(rs.getString(3));
+                lab.setDpi(rs.getString(4));
+                lab.setTelefono(rs.getString(5));
+                lab.setExamen_realizar(rs.getString(6));
+                lab.setCorreo(rs.getString(7));
+                lab.setFecha_trabajar(Date.valueOf(rs.getString(8)));
+                lab.setPassword(rs.getString(9));
                 lista.add(lab);
             }
         } catch (Exception e) {

@@ -82,7 +82,9 @@ public class CitaLaboratoristaDAO {
             ps.setString(6, citaLab.getCodigoLaboratorista());
             ps.setString(7, citaLab.getCodigoMedico());
             ps.executeUpdate();
+            respuesta = 1;
         } catch (Exception e) {
+            respuesta = 2;
         }
         return respuesta;
     }

@@ -33,8 +33,13 @@
                     Agendar Cita
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="ControladorPacienteDB?menu=AgendarCitaDoctor&accion=Listar" target="framePaciente" target="framePaciente2">Consulta Médico</a>
-                    <a class="dropdown-item" href="ControladorPacienteDB?menu=AgendarCitaExamenLab&accion=Listar" target="framePaciente">Examen Laboratorio</a>
+                      <form action ="ControladorPacienteDB?menu=AgendarCitaExamenLab&accion=Listar" method="POST">
+                      <input type="hidden" value="<%out.println(request.getAttribute("codigoPaciente"));%>" name="txtCodigotx" class="form-control">
+                      <input type="submit" class="dropdown-item" name="accion" formtarget="framePaciente" value="Consulta Doctor" formaction="ControladorPacienteDB?menu=AgendarCitaDoctor&accion=Listar">
+                      <input type="submit" class="dropdown-item" name="accion" formtarget="framePaciente" value="Examen Laboratorio">
+                      </form>
+                    <!--<a class="dropdown-item" href="PacienteCitaPendienteMedico.jsp" target="framePaciente">Médico</a>
+                    <a class="dropdown-item" href="PacienteCitaPendienteLaboratorio.jsp" target="framePaciente">Laboratorio</a>\-->
                   </div>
                 </li>
                 <li class="nav-item dropdown">

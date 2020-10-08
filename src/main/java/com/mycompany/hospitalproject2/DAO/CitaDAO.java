@@ -32,7 +32,9 @@ public class CitaDAO {
             ps.setString(5, cita.getPaciente());
             ps.setString(6, cita.getMedico());           
             ps.executeUpdate();
+            respuesta = 1;
         } catch (Exception e) {
+            respuesta = 2;
         }
         return respuesta;
     }
