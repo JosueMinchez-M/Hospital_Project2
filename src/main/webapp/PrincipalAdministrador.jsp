@@ -48,6 +48,20 @@
                     <a class="dropdown-item" href="Prueba?menu=AgregarPaciente&accion=Listar" target="frameAdministrador">Paciente</a>
                   </div>
                 </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Consultas
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <form action ="ControladorAdimDB?menu=Consulta1&accion=Listar" method="POST">
+                          <input type="hidden" value="<%out.println(request.getAttribute("codigoAdmin"));%>" name="txtCodigotx" class="form-control" readonly>
+                          <input type="submit" class="dropdown-item" name="accion" formtarget="frameAdministrador" value="Los 10 médicos que más informes han realizado dentro de un intervalo de tiempo">
+                          <input type="submit" class="dropdown-item" name="accion" formtarget="frameAdministrador" formaction="ControladorLaboratoristaDB?menu=Consulta2&accion=Listar" value="Exámenes realizados en el día">
+                          <input type="submit" class="dropdown-item" name="accion" formtarget="frameAdministrador" formaction="ControladorMedicoDB?menu=Consulta3&accion=Listar" value="Falta Reporte/Consulta">
+                          <input type="submit" class="dropdown-item" name="accion" formtarget="frameAdministrador" formaction="ControladorMedicoDB?menu=Consulta4&accion=Listar" value="Falta Reporte/Consulta">
+                      </form>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="dropdown">

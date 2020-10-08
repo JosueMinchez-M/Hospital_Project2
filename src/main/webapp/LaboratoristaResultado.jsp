@@ -33,6 +33,26 @@
         </style>
     </head>
     <body>
+        <c:if test="${numAgregado eq 1}">
+            <div class="alert alert-success text-center" role="alert">
+                Resultado Registrado Correctamente
+            </div>
+        </c:if>
+        <c:if test="${numAgregado eq 2}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss, a ocurrido un Error! No se Registro el Resultado
+            </div>
+        </c:if>
+        <c:if test="${numBuscVacio eq 3}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss! El campo ingrese codigo esta vacío
+            </div>
+        </c:if>
+        <c:if test="${numVacioConsulta eq 5}">
+            <div class="alert alert-danger text-center" role="alert">
+                ¡Upss! Algun campo se Encuentra Vacío
+            </div>
+        </c:if>
         <h1 class="text-center">Buscador de Citas Examenes</h1>
         <div class="form-group">
             <form action="ControladorLaboratoristaDB?menu=ResultadoLab&accion=ListarBusqueda" method="POST">
@@ -107,7 +127,7 @@
                               <input type="text" name="txtCodPacienteRes" value="${editarCitaLab.getCodigoPaciente()}" class="form-control" placeholder="Código Paciente">
                           </div>
                           <div class="col">
-                              <input type="text" name="txtCodDoctorRes" value="${editarCitaLab.getCodigoMedico()}" class="form-control" placeholder="Código Doctor">
+                              <input type="text" name="txtCodDoctorRes" value="${editarCitaLab.getCodigoMedico()}" class="form-control" placeholder="Código Doctor(Opcional)">
                           </div>
                         </div>
                           </br>

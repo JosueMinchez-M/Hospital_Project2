@@ -57,4 +57,22 @@ public class ReporteDAO {
         }
         return lista;
     }
+    public List listarAdminConsulta1(){
+        String sql = "SELECT Medico_codigo, COUNT(*) AS CantidadInformes FROM Informe GROUP BY Medico_codigo "
+                + "ORDER BY CantidadInformes DESC LIMIT 10;";
+        List <Reporte>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Reporte rep = new Reporte();
+                rep.setPaciente(rs.getString(1));;
+                rep.setHora(rs.getString(2));
+                lista.add(rep);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
 }

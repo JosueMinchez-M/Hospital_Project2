@@ -52,9 +52,17 @@ public class ControladorLaboratoristaDB extends HttpServlet {
                     String codigoLab = request.getParameter("txtCodigoLab");
                     request.setAttribute("codLab", codigoLab);
                     String codIngresado = request.getParameter("txtBuscarCodigo");
-                    List listaResulBus = citaLaboratoristaDAO.listarCitaLabPorCod(codIngresado);
-                    request.setAttribute("listaCitaLab", listaResulBus);
-                    request.getRequestDispatcher("LaboratoristaResultado.jsp").forward(request, response);
+                    if(codIngresado.replaceAll("\\r|\\n", "").equals("")){
+                        int numListaVacia = 3;
+                        request.setAttribute("numBuscVacio", numListaVacia);
+                        List lista3 = citaLaboratoristaDAO.listarCitaLab(codigoLab);
+                        request.setAttribute("listaCitaLab", lista3);
+                        request.getRequestDispatcher("LaboratoristaResultado.jsp").forward(request, response);
+                    }else{
+                        List listaResulBus = citaLaboratoristaDAO.listarCitaLabPorCod(codIngresado);
+                        request.setAttribute("listaCitaLab", listaResulBus);
+                        request.getRequestDispatcher("LaboratoristaResultado.jsp").forward(request, response);   
+                    }
                     break;
                 case "Editar":
                     String id = request.getParameter("id");
@@ -76,13 +84,27 @@ public class ControladorLaboratoristaDB extends HttpServlet {
                     String medicoCodigo = request.getParameter("txtCodDoctorRes");//txtCodExamenRes
                     String examenCodigo = request.getParameter("txtCodExamenRes");//txtCodLabRes
                     String labCodigo = request.getParameter("txtCodLabRes");//txtHoraRes
-                    Resultado result = new Resultado(codigo, pacienteCodigo, Date.valueOf(fechaExamen), horaExamen, examenCodigo, labCodigo, orden, informe, medicoCodigo);
-                    resultadoDAO.agregar(result);
-                    String codLab1 = request.getParameter("txtCodLabRes");
-                    request.setAttribute("codLab", codLab1);
-                    List lista2 = citaLaboratoristaDAO.listarCitaLab(codLab1);
-                    request.setAttribute("listaCitaLab", lista2);
-                    request.getRequestDispatcher("LaboratoristaResultado.jsp").forward(request, response);
+                    if(codigo.replaceAll("\\r|\\n", "").equals("")|| orden.replaceAll("\\r|\\n", "").equals("")||informe.replaceAll("\\r|\\n", "").equals("")||
+                            fechaExamen.replaceAll("\\r|\\n", "").equals("")||horaExamen.replaceAll("\\r|\\n", "").equals("")||
+                            pacienteCodigo.replaceAll("\\r|\\n", "").equals("")||
+                            examenCodigo.replaceAll("\\r|\\n", "").equals("")||labCodigo.replaceAll("\\r|\\n", "").equals("")){
+                        int numAgregarResultVacio = 5;
+                        request.setAttribute("numVacioConsulta", numAgregarResultVacio);
+                        String codLab1 = request.getParameter("txtCodLabRes");
+                        request.setAttribute("codLab", codLab1);
+                        List lista2 = citaLaboratoristaDAO.listarCitaLab(codLab1);
+                        request.setAttribute("listaCitaLab", lista2);
+                        request.getRequestDispatcher("LaboratoristaResultado.jsp").forward(request, response);
+                    }else{
+                        Resultado result = new Resultado(codigo, pacienteCodigo, Date.valueOf(fechaExamen), horaExamen, examenCodigo, labCodigo, orden, informe, medicoCodigo);
+                        int numAgregarResultado = resultadoDAO.agregar(result);
+                        request.setAttribute("numAgregado", numAgregarResultado);
+                        String codLab1 = request.getParameter("txtCodLabRes");
+                        request.setAttribute("codLab", codLab1);
+                        List lista2 = citaLaboratoristaDAO.listarCitaLab(codLab1);
+                        request.setAttribute("listaCitaLab", lista2);
+                        request.getRequestDispatcher("LaboratoristaResultado.jsp").forward(request, response);
+                    }
                     break;
             }
         }else if(menu.equals("Consulta1")){

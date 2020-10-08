@@ -93,9 +93,6 @@ public class UploadServlet extends HttpServlet {
             OutputStream outputStream = new FileOutputStream(fileName);
             fileContent.transferTo(outputStream);
             File file = Paths.get(filePart.getSubmittedFileName()).toFile();
-            //File pathCompleto = file.getAbsolutePath().replace("/" + file.getName(), "");
-            //file.getAbsolutePath().replace("/" + file.getName(), "")
-            JOptionPane.showMessageDialog(null, file.getAbsolutePath());
             importarXML.analizarXML(file.getAbsolutePath());
             request.getRequestDispatcher("message.jsp").forward(request, response);
         } catch (IOException | ServletException e) {

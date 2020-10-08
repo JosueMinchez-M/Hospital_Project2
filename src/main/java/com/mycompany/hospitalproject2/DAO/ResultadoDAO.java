@@ -34,7 +34,9 @@ public class ResultadoDAO {
             ps.setString(8, res.getExamen());
             ps.setString(9, res.getLaboratorista());
             ps.executeUpdate();
+            respuesta = 1;
         } catch (Exception e) {
+            respuesta = 2;
         }
         return respuesta;
     }
