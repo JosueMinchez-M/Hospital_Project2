@@ -25,15 +25,6 @@
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Llenar Campo
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="#" target="frameLaboratorista">Llenar aqui</a>
-                    <a class="dropdown-item" href="#" target="frameLaboratorista">Llenar aqui</a>
-                  </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Resultado
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -43,8 +34,19 @@
                       </form>
                   </div>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#" target="frameLaboratorista">Llenar aqui</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Consultas
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <form action ="ControladorLaboratoristaDB?menu=Consulta1&accion=Listar" method="POST">
+                          <input type="hidden" value="<%out.println(request.getAttribute("codigoLaboratorista"));%>" name="txtCodigotx" class="form-control" readonly>
+                          <input type="submit" class="dropdown-item" name="accion" formtarget="frameLaboratorista" value="Exámenes a realizarse en su turno del día">
+                          <input type="submit" class="dropdown-item" name="accion" formtarget="frameLaboratorista" formaction="ControladorLaboratoristaDB?menu=Consulta2&accion=Listar" value="Exámenes realizados en el día">
+                          <input type="submit" class="dropdown-item" name="accion" formtarget="frameLaboratorista" formaction="ControladorMedicoDB?menu=Consulta3&accion=Listar" value="Falta Reporte/Consulta">
+                          <input type="submit" class="dropdown-item" name="accion" formtarget="frameLaboratorista" formaction="ControladorMedicoDB?menu=Consulta4&accion=Listar" value="Falta Reporte/Consulta">
+                      </form>
+                  </div>
                 </li>
               </ul>
             </div>

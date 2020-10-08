@@ -85,6 +85,24 @@ public class ControladorLaboratoristaDB extends HttpServlet {
                     request.getRequestDispatcher("LaboratoristaResultado.jsp").forward(request, response);
                     break;
             }
+        }else if(menu.equals("Consulta1")){
+            switch(accion){
+                case "Listar":
+                    String codigoLaboratorista = request.getParameter("txtCodigotx");
+                    List listaLabConsulta1 = citaLaboratoristaDAO.listarLabConsulta1(codigoLaboratorista);
+                    request.setAttribute("listLab", listaLabConsulta1);
+                    request.getRequestDispatcher("LabConsulta1.jsp").forward(request, response);
+                    break;
+            }
+        }else if(menu.equals("Consulta2")){
+            switch(accion){
+                case "Listar":
+                    String codigoLaboratorista = request.getParameter("txtCodigotx");
+                    List listaLabConsulta1 = citaLaboratoristaDAO.listarLabConsulta2(codigoLaboratorista);
+                    request.setAttribute("listLab", listaLabConsulta1);
+                    request.getRequestDispatcher("LabConsulta1.jsp").forward(request, response);
+                    break;
+            }
         }
     }
     

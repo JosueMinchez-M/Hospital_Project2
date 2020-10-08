@@ -203,4 +203,58 @@ public class CitaLaboratoristaDAO {
         }
         return lista;
     }
+    public List listarLabConsulta1(String codLab){
+//        String sql = "SELECT * FROM CitaLaboratorista WHERE Laboratorista_codigo= '"+codLab.replaceAll("\\r|\\n", "")+"' "
+//                + "AND DATE(fecha_citaLab) = DATE(NOW())"; //AND DATE(fecha_citaLab) >= DATE(NOW())
+        String sql= "SELECT * FROM CitaLaboratorista WHERE Laboratorista_codigo = '"+codLab.replaceAll("\\r|\\n", "")+"' AND "
+                + "TIME_FORMAT(TIME(hora_establecida_citaLab), '%H:%i') > TIME_FORMAT(TIME(NOW()),'%H%i') "
+                + "AND DATE(fecha_citaLab) = DATE(NOW());";
+        List <CitaLaboratorista>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            //ps.setString(1, codigoCitaLab);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                CitaLaboratorista citLab = new CitaLaboratorista();
+                citLab.setCodigo(rs.getString(1));
+                citLab.setCodigoExamen(rs.getString(2));
+                citLab.setFechaCitaLab(rs.getDate(3));
+                citLab.setHoraEstablecida(rs.getString(4));
+                citLab.setCodigoPaciente(rs.getString(5));
+                citLab.setCodigoLaboratorista(rs.getString(6));
+                citLab.setCodigoMedico(rs.getString(7));
+                lista.add(citLab);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    public List listarLabConsulta2(String codLab){
+//        String sql = "SELECT * FROM CitaLaboratorista WHERE Laboratorista_codigo= '"+codLab.replaceAll("\\r|\\n", "")+"' "
+//                + "AND DATE(fecha_citaLab) = DATE(NOW())"; //AND DATE(fecha_citaLab) >= DATE(NOW())
+        String sql= "SELECT * FROM CitaLaboratorista WHERE Laboratorista_codigo = '"+codLab.replaceAll("\\r|\\n", "")+"' AND "
+                + "TIME_FORMAT(TIME(hora_establecida_citaLab), '%H:%i') < TIME_FORMAT(TIME(NOW()),'%H%i') "
+                + "AND DATE(fecha_citaLab) = DATE(NOW());";
+        List <CitaLaboratorista>lista = new ArrayList<>();
+        try {
+            acceso = conexion.Conectar();
+            ps = acceso.prepareStatement(sql);
+            //ps.setString(1, codigoCitaLab);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                CitaLaboratorista citLab = new CitaLaboratorista();
+                citLab.setCodigo(rs.getString(1));
+                citLab.setCodigoExamen(rs.getString(2));
+                citLab.setFechaCitaLab(rs.getDate(3));
+                citLab.setHoraEstablecida(rs.getString(4));
+                citLab.setCodigoPaciente(rs.getString(5));
+                citLab.setCodigoLaboratorista(rs.getString(6));
+                citLab.setCodigoMedico(rs.getString(7));
+                lista.add(citLab);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
 }
